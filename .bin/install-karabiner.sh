@@ -112,7 +112,8 @@ USAGE
 print_completion_message() {
   if [[ -x "$DOTFILES_DIR/.bin/karabiner-keymap-hud" ]]; then
     log_info "キーマップ HUD デーモンを起動します。"
-    "$DOTFILES_DIR/.bin/karabiner-keymap-hud" start >/dev/null 2>&1 || true
+    # 通常は常駐プログラムを起動し、ドライランでは実行予定だけを表示する。
+    run_command "$DOTFILES_DIR/.bin/karabiner-keymap-hud" start || true
   fi
   log_info "Karabiner-Elements の導入手順が完了しました。"
   log_info "初回はシステム設定で Input Monitoring とアクセシビリティの許可が必要です。"

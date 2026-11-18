@@ -24,8 +24,17 @@ is_running() {
   local pid
   [[ -f "$PID_FILE" ]] || return 1
   pid="$(<"$PID_FILE")"
-  [[ "$pid" =~ ^[0-9]+$ ]] || return 1
-  kill -0 "$pid" 2>/dev/null
+  is_hud_process "$pid"
+}
+
+is_hud_process() {
+  local pid="$1" process_command expected_command
+  [[ "$pid" =~ ^[1-9][0-9]*$ ]] || return 1
+  kill -0 "$pid" 2>/dev/null || return 1
+  process_command="$(ps -ww -p "$pid" -o command= 2>/dev/null)" || return 1
+  expected_command="/usr/bin/osascript -l JavaScript $HUD_JS daemon $HUD_HTML $LAYERS_JSON $PID_FILE $CMD_FILE"
+  # 保存した番号の再利用に備え、この設定で起動した常駐プログラムの全引数を照合する。
+  [[ "$process_command" == "$expected_command" ]]
 }
 
 wait_until_ready() {
@@ -71,12 +80,14 @@ hide_hud() {
 stop_daemon() {
   local pid
   if is_running; then
+    # この設定の常駐プログラムだけに終了を通知し、残っている場合だけ停止する。
     printf 'quit\n' >"$CMD_FILE"
     pid="$(<"$PID_FILE")"
     sleep 0.1
-    kill "$pid" 2>/dev/null || true
+    if is_hud_process "$pid"; then
+      kill "$pid" 2>/dev/null || true
+    fi
   fi
-  pkill -f 'osascript -l JavaScript .*keymap-hud.js' 2>/dev/null || true
   rm -f "$PID_FILE"
   printf 'idle\n' >"$CMD_FILE" 2>/dev/null || true
 }

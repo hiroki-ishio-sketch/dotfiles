@@ -4,7 +4,8 @@ set -Eeuo pipefail
 readonly DEFAULT_REPOSITORY="https://github.com/ishiooon/dotfiles.git"
 readonly DEFAULT_DIRECTORY="$HOME/dotfiles"
 readonly FORMULAE=(neovim starship fzf ripgrep fd lazygit deno gh node php w3m coreutils)
-readonly CASKS=(wezterm font-udev-gothic-nf)
+# Karabiner も不足パッケージとして記録し、失敗時は今回導入したものだけを削除する。
+readonly CASKS=(wezterm font-udev-gothic-nf karabiner-elements)
 readonly MANAGED_HOME_PATHS=(
   "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.bash" "$HOME/.zsh" "$HOME/.config"
   "$HOME/.bin" "$HOME/.claude" "$HOME/.agents" "$HOME/.codex/AGENTS.md"
@@ -23,6 +24,8 @@ PHP_DEBUG_CREATED=false
 HOMEBREW_CREATED=false
 CODEX_DIRECTORY_EXISTED=false
 BORDERS_PREEXISTING=false
+# 起動前に停止中だと確認できた HUD だけを、復元時の停止対象にする。
+KARABINER_HUD_START_ATTEMPTED=false
 declare -a COMPLETED_STEPS=()
 declare -a SKIPPED_ITEMS=()
 declare -a MISSING_ITEMS=()
@@ -224,6 +227,14 @@ install_janky_borders() {
 install_karabiner() {
   local install_script="$DOTFILES_DIR/.bin/install-karabiner.sh"
   [[ "$DRY_RUN" == "true" || -x "$install_script" ]] || fail "Karabiner のインストールスクリプトが見つかりません: $install_script"
+  local hud_script="$DOTFILES_DIR/.bin/karabiner-keymap-hud" hud_status
+  # 導入済みの常駐プロセスは維持し、起動途中に失敗した場合も今回の起動だけを復元する。
+  if [[ "$DRY_RUN" != "true" && -x "$hud_script" ]]; then
+    hud_status="$("$hud_script" status 2>/dev/null || true)"
+    if [[ "$hud_status" == "stopped" ]]; then
+      KARABINER_HUD_START_ATTEMPTED=true
+    fi
+  fi
   run_command bash "$install_script"
 }
 install_neovim_plugins() {
@@ -249,6 +260,10 @@ handle_failure() {
 rollback() {
   set +e
   printf '[復元] 変更した設定と今回作成したデータを復元します。\n' >&2
+  # 設定リンクや今回取得したソースを削除する前に、今回起動した HUD を停止する。
+  if [[ "$KARABINER_HUD_START_ATTEMPTED" == "true" ]]; then
+    "$DOTFILES_DIR/.bin/karabiner-keymap-hud" stop || record_warning "キーマップ HUD の停止に失敗しました。"
+  fi
   local path index
   if [[ -n "$ROLLBACK_DIR" ]]; then
     if [[ "$SNAPSHOT_READY" == "true" ]]; then

@@ -23,8 +23,33 @@ if [[ ! -x "$INSTALL_SCRIPT" ]]; then
   exit 1
 fi
 
-# ドライランでは Homebrew を実行せず、実環境を汚さずに導入手順だけを確認する。
-OUTPUT="$(bash "$INSTALL_SCRIPT" --env=localdev --dry-run)"
+# 実際の Homebrew と常駐プログラムを呼ばないよう、一時配置した模擬環境で検証する。
+TEMP_ROOT="$(mktemp -d)"
+trap 'rm -rf "$TEMP_ROOT"' EXIT
+FIXTURE="$TEMP_ROOT/dotfiles"
+mkdir -p "$FIXTURE/.bin" "$FIXTURE/.config/karabiner/assets/complex_modifications" "$TEMP_ROOT/home" "$TEMP_ROOT/bin"
+cp "$INSTALL_SCRIPT" "$FIXTURE/.bin/install-karabiner.sh"
+printf '{}\n' > "$FIXTURE/.config/karabiner/karabiner.json"
+printf '{}\n' > "$FIXTURE/.config/karabiner/assets/complex_modifications/f_hjkl_arrows.json"
+cat > "$FIXTURE/.bin/karabiner-keymap-hud" <<'MOCK'
+#!/usr/bin/env bash
+# 常駐プログラムの代わりに、呼び出された引数を記録する。
+printf '%s\n' "$*" >> "$HUD_CALLS"
+MOCK
+cat > "$TEMP_ROOT/bin/brew" <<'MOCK'
+#!/usr/bin/env bash
+# 未導入状態だけを再現し、実際のパッケージ管理には触れない。
+printf '%s\n' "$*" >> "$BREW_CALLS"
+[[ "${1:-}" != list ]]
+MOCK
+chmod +x "$FIXTURE/.bin/karabiner-keymap-hud" "$TEMP_ROOT/bin/brew"
+export HOME="$TEMP_ROOT/home" HUD_CALLS="$TEMP_ROOT/hud-calls" BREW_CALLS="$TEMP_ROOT/brew-calls"
+export PATH="$TEMP_ROOT/bin:$PATH"
+OUTPUT="$(bash "$FIXTURE/.bin/install-karabiner.sh" --env=localdev --dry-run)"
+if [[ -e "$HUD_CALLS" || -e "$BREW_CALLS" ]]; then
+  echo "ドライランで Homebrew または常駐プログラムを実行しました。" >&2
+  exit 1
+fi
 
 for expected in \
   "brew install --cask karabiner-elements" \
@@ -36,5 +61,12 @@ for expected in \
     exit 1
   fi
 done
+
+# 通常の導入ではパッケージを導入し、常駐プログラムを一度だけ起動する。
+bash "$FIXTURE/.bin/install-karabiner.sh" --env=localdev >/dev/null
+if [[ "$(cat "$HUD_CALLS")" != start ]] || ! grep -Fxq 'install --cask karabiner-elements' "$BREW_CALLS"; then
+  echo "通常導入で必要なパッケージ導入と一度だけの常駐起動が行われませんでした。" >&2
+  exit 1
+fi
 
 echo "PASS: Karabiner のインストール補助スクリプトは Homebrew 導入手順を確認できます。"
