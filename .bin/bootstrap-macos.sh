@@ -44,6 +44,7 @@ main() {
   run_step "PHP デバッグ拡張の準備" install_php_debug_adapter
   run_step "dotfiles 設定のリンク" install_dotfiles_configuration
   run_step "JankyBorders の準備" install_janky_borders
+  run_step "Karabiner-Elements の準備" install_karabiner
   run_step "Neovim プラグインの同期" install_neovim_plugins
   print_completion_message
   print_summary "成功"
@@ -220,6 +221,11 @@ install_janky_borders() {
   [[ "$DRY_RUN" == "true" || -x "$install_script" ]] || fail "JankyBorders のインストールスクリプトが見つかりません: $install_script"
   run_command bash "$install_script"
 }
+install_karabiner() {
+  local install_script="$DOTFILES_DIR/.bin/install-karabiner.sh"
+  [[ "$DRY_RUN" == "true" || -x "$install_script" ]] || fail "Karabiner のインストールスクリプトが見つかりません: $install_script"
+  run_command bash "$install_script"
+}
 install_neovim_plugins() {
   run_command nvim --headless '+Lazy! sync' '+qa'
 }
@@ -320,7 +326,7 @@ print_summary() {
 print_usage() {
   cat <<'USAGE'
 Usage: bash .bin/bootstrap-macos.sh [--dry-run] [--directory PATH] [--repository URL] [--env=localdev]
-新しい macOS にシェル、Neovim、Starship、WezTerm、JankyBorders、Codex の管理対象設定と関連ツールを導入します。
+新しい macOS にシェル、Neovim、Starship、WezTerm、JankyBorders、Karabiner-Elements、Codex の管理対象設定と関連ツールを導入します。
 失敗時は設定と今回作成したデータを復元します。既存の Git リポジトリと導入済みパッケージは変更しません。
 USAGE
 }

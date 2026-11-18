@@ -30,11 +30,15 @@
 
 !/.config/borders
 !/.config/borders/**
+!/.config/karabiner
+!/.config/karabiner/**
 !/.config/nvim
 !/.config/mcphub
 !/.config/wezterm
 !/.config/starship.toml
 /.config/git
+# Karabiner が端末ごとに書き出す自動バックアップは共有しない。
+/.config/karabiner/automatic_backups/
 
 
 # ===================================
@@ -45,6 +49,8 @@
 
 !/.bin/install.sh
 !/.bin/install-janky-borders.sh
+!/.bin/install-karabiner.sh
+!/.bin/karabiner-keymap-hud
 !/.bin/bootstrap-macos.sh
 !/.bin/install-wordpress-stubs.sh
 .config/nvim/lazy-lock.json

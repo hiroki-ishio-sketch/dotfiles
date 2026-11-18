@@ -1,0 +1,220 @@
+{
+  "layout": "jis",
+  "legends": "us",
+  "model": "MacBook Pro",
+  "layers": [
+    {
+      "id": "base",
+      "name": "Base",
+      "trigger": "通常入力",
+      "bindings": {
+        "eisuu": "↩/⌘",
+        "kana": "↩/⌘",
+        "space": "␣/⇧"
+      }
+    },
+    {
+      "id": "f",
+      "name": "f",
+      "trigger": "f 押し込み中",
+      "bindings": {
+        "h": "←",
+        "j": "↓",
+        "k": "↑",
+        "l": "→",
+        "e": "delete",
+        "m": "あいう",
+        "a": "tab/⇧tab",
+        "n": "ABC",
+        "/": "map"
+      }
+    }
+  ],
+  "rows": [
+    [
+      "esc",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "-",
+      "^",
+      "¥",
+      "delete"
+    ],
+    [
+      "tab",
+      "q",
+      "w",
+      "e",
+      "r",
+      "t",
+      "y",
+      "u",
+      "i",
+      "o",
+      "p",
+      "@",
+      "["
+    ],
+    [
+      "control",
+      "a",
+      "s",
+      "d",
+      "f",
+      "g",
+      "h",
+      "j",
+      "k",
+      "l",
+      ";",
+      ":",
+      "]"
+    ],
+    [
+      "shift_l",
+      "z",
+      "x",
+      "c",
+      "v",
+      "b",
+      "n",
+      "m",
+      ",",
+      ".",
+      "/",
+      "\\",
+      "shift_r"
+    ],
+    [
+      "caps",
+      "option_l",
+      "command_l",
+      "eisuu",
+      "space",
+      "kana",
+      "command_r",
+      "option_r",
+      "fn",
+      "arrow_cluster"
+    ]
+  ],
+  "row_extras": {
+    "1": [
+      {
+        "key": "return",
+        "after": "[",
+        "row_span": 2
+      }
+    ],
+    "2": [
+      {
+        "key": "return",
+        "placeholder": true
+      }
+    ]
+  },
+  "shift_labels": {
+    "1": "!",
+    "2": "@",
+    "3": "#",
+    "4": "$",
+    "5": "%",
+    "6": "^",
+    "7": "&",
+    "8": "*",
+    "9": "(",
+    "0": ")",
+    "-": "_",
+    "^": "+",
+    "¥": "|",
+    "@": "{",
+    "[": "}",
+    ";": ":",
+    ":": "\"",
+    "]": "",
+    ",": "<",
+    ".": ">",
+    "/": "?",
+    "\\": "|"
+  },
+  "kana_labels": {},
+  "key_labels": {
+    "esc": "esc",
+    "delete": "⌫",
+    "tab": "⇥",
+    "control": "control",
+    "shift_l": "shift",
+    "shift_r": "shift",
+    "return": "return",
+    "caps": "caps lock",
+    "option_l": "option",
+    "option_r": "option",
+    "command_l": "command",
+    "command_r": "command",
+    "eisuu": "英数",
+    "kana": "かな",
+    "fn": "fn",
+    "space": "",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "0": "0",
+    "-": "-",
+    "^": "=",
+    "¥": "\\",
+    "@": "[",
+    "[": "]",
+    ";": ";",
+    ":": "'",
+    "]": "]",
+    "\\": "\\"
+  },
+  "key_glyphs": {
+    "control": "⌃",
+    "option_l": "⌥",
+    "option_r": "⌥",
+    "command_l": "⌘",
+    "command_r": "⌘",
+    "shift_l": "⇧",
+    "shift_r": "⇧",
+    "caps": "⇪",
+    "return": "↩",
+    "tab": "⇥",
+    "delete": "⌫",
+    "esc": "⎋"
+  },
+  "key_widths": {
+    "esc": 1.25,
+    "delete": 1.55,
+    "tab": 1.55,
+    "control": 1.7,
+    "shift_l": 2.15,
+    "shift_r": 2.15,
+    "return": 1.55,
+    "caps": 1.15,
+    "option_l": 1.15,
+    "option_r": 1.15,
+    "command_l": 1.3,
+    "command_r": 1.3,
+    "eisuu": 1.15,
+    "kana": 1.15,
+    "fn": 1.15,
+    "space": 3.55,
+    "¥": 1.0,
+    "arrow_cluster": 3.05
+  }
+}

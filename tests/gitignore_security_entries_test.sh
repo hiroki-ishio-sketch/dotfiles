@@ -54,6 +54,11 @@ assert_ignored ".config/amethyst/amethyst.yml"
 # JankyBorders の見た目設定は個人環境の機密情報を含まないため、dotfiles で共有する。
 assert_not_ignored ".config/borders/bordersrc"
 
+# Karabiner の f+hjkl 設定は端末共通で再現したいため共有し、自動バックアップだけ除外する。
+assert_not_ignored ".config/karabiner/karabiner.json"
+assert_not_ignored ".config/karabiner/assets/complex_modifications/f_hjkl_arrows.json"
+assert_ignored ".config/karabiner/automatic_backups/example.json"
+
 # SketchyBar の利用を終了したため、古い設定とプラグインが共有対象へ戻らないことを検証する。
 assert_ignored ".config/sketchybar/sketchybarrc"
 assert_ignored ".config/sketchybar/colors.sh"
@@ -113,9 +118,14 @@ assert_not_ignored "tests/nvim_neo_tree_git_refresh_test.lua"
 assert_ignored ".agents/skills/superpowers"
 assert_ignored ".agents/skills/hallmark"
 
-# JankyBorders の導入手順は再現性のために dotfiles で共有する。
+# JankyBorders と Karabiner の導入手順は再現性のために dotfiles で共有する。
 assert_not_ignored ".bin/install-janky-borders.sh"
+assert_not_ignored ".bin/install-karabiner.sh"
+assert_not_ignored ".bin/karabiner-keymap-hud"
 assert_not_ignored ".bin/bootstrap-macos.sh"
+assert_not_ignored ".config/karabiner/scripts/keymap-hud.js"
+assert_not_ignored ".config/karabiner/scripts/keymap-hud.html"
+assert_not_ignored ".config/karabiner/keymap-layers.json"
 
 # SketchyBar の導入手順は削除対象のため、共有対象へ戻らないことを検証する。
 assert_ignored ".bin/install-sketchybar.sh"

@@ -8,8 +8,9 @@ source ~/.zsh/aliases.zsh     # エイリアス定義
 # starshipの呼び出し
 eval "$(starship init zsh)"
 
-
-
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 alias gh='command gh'
+
+# bun の補完。未インストールなら何もしない。
+if [[ -n "$BUN_INSTALL" && -s "$BUN_INSTALL/_bun" ]]; then
+  source "$BUN_INSTALL/_bun"
+fi
