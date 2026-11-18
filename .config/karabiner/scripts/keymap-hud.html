@@ -184,34 +184,51 @@
       font-size: 10px;
       color: var(--grey2);
     }
-    /* Apple JIS return: L字。下段左のノッチに ] が収まる */
+    /*
+      Apple 公式 JIS return（258×340 px 実測）:
+      上段フル幅、下段は左 ~19% 欠け。巨大なせり出しはしない。
+    */
     .key.jis-return {
-      width: calc(var(--unit) * 1.7);
+      width: calc(var(--unit) * 1.72);
       height: calc(var(--key-h) * 2 + var(--gap));
       margin-bottom: calc(-1 * (var(--key-h) + var(--gap)));
-      border-radius: 8px;
-      /* 下半分の左側 ~1u を空けて ] と被らないようにする */
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        62% 100%,
-        62% 50%,
-        0 50%
-      );
-      -webkit-clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        62% 100%,
-        62% 50%,
-        0 50%
-      );
-      justify-content: flex-start;
-      padding-top: 10px;
-      font-size: 11px;
-      z-index: 1;
+      background: transparent;
+      border: none;
+      box-shadow: none;
       overflow: visible;
+      z-index: 1;
+      padding: 0;
+    }
+    .key.jis-return .return-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.45));
+      overflow: visible;
+    }
+    .key.jis-return .glyph {
+      position: absolute;
+      right: 11px;
+      top: 10px;
+      z-index: 2;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--fg0);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .key.jis-return .word {
+      position: absolute;
+      right: 10px;
+      bottom: 9px;
+      z-index: 2;
+      font-size: 9px;
+      font-weight: 650;
+      color: var(--grey2);
+      letter-spacing: 0.02em;
+      pointer-events: none;
     }
     .key.bracket-close {
       z-index: 3;
@@ -267,7 +284,7 @@
   <div class="shell">
     <div class="header">
       <h1>Keymap Layers · JIS shape / US legends</h1>
-      <div class="sub">f + / で表示 · 離すと閉じる · Gruvbox Material</div>
+      <div class="sub">f + b で表示 · 離すと閉じる · Gruvbox Material</div>
     </div>
     <div class="layers" id="layers"></div>
   </div>
@@ -323,7 +340,41 @@
 
       const glyph = def.key_glyphs && def.key_glyphs[key];
       if (options.jisReturn) {
-        keyEl.textContent = glyph ? `${glyph} return` : "return";
+        // Apple JIS return: top full-width, bottom left inset ~19% (official asset ratio).
+        const gid = `retGrad-${layer.id}-${Math.random().toString(36).slice(2, 7)}`;
+        keyEl.innerHTML = `
+          <svg class="return-svg" viewBox="0 0 100 132" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#45403d"/>
+                <stop offset="100%" stop-color="#3c3836"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#${gid})" stroke="#1d2021" stroke-width="1.2" stroke-linejoin="round"
+              d="M 5.5 1
+                 H 94.5
+                 Q 99 1 99 5.5
+                 V 126.5
+                 Q 99 131 94.5 131
+                 H 24
+                 Q 19 131 19 126.5
+                 V 66
+                 H 5.5
+                 Q 1 66 1 61.5
+                 V 5.5
+                 Q 1 1 5.5 1
+                 Z"/>
+            <path fill="none" stroke="rgba(212,190,152,0.14)" stroke-width="1"
+              d="M 6 2.2 H 94 Q 97.5 2.2 97.5 5.5 V 8"/>
+          </svg>`;
+        const g = document.createElement("div");
+        g.className = "glyph";
+        g.textContent = glyph || "↩";
+        const w = document.createElement("div");
+        w.className = "word";
+        w.textContent = "return";
+        keyEl.appendChild(g);
+        keyEl.appendChild(w);
         return keyEl;
       }
 

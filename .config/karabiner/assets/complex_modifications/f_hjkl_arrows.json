@@ -2,7 +2,7 @@
   "title": "f layer + 英数/かな/space tap-hold",
   "rules": [
     {
-      "description": "f layer; f+n=ABC f+m=あいう; f+/=HUD; 英数 tap=Enter hold=⌘; f↔英数 either order +a = app switcher; space hold=Shift",
+      "description": "f layer; f+n=ABC f+m=あいう; f+b=HUD; 英数 tap=Enter hold=⌘; f↔英数 either order +a = app switcher; space hold=Shift",
       "manipulators": [
         {
           "type": "basic",
@@ -836,37 +836,6 @@
           "conditions": [
             {
               "type": "variable_if",
-              "name": "f_held",
-              "value": false
-            }
-          ],
-          "from": {
-            "key_code": "japanese_kana",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "right_command"
-            }
-          ],
-          "to_if_alone": [
-            {
-              "key_code": "return_or_enter"
-            }
-          ],
-          "parameters": {
-            "basic.to_if_alone_timeout_milliseconds": 200
-          }
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            {
-              "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
             }
@@ -1046,76 +1015,6 @@
         },
         {
           "type": "basic",
-          "from": {
-            "simultaneous": [
-              {
-                "key_code": "f"
-              },
-              {
-                "key_code": "slash"
-              }
-            ],
-            "simultaneous_options": {
-              "key_down_order": "strict",
-              "key_up_when": "any",
-              "to_after_key_up": [
-                {
-                  "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
-                }
-              ]
-            },
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "set_variable": {
-                "name": "f_held",
-                "value": true,
-                "key_up_value": false
-              }
-            },
-            {
-              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
-            }
-          ],
-          "parameters": {
-            "basic.simultaneous_threshold_milliseconds": 350
-          }
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "f_held",
-              "value": true
-            }
-          ],
-          "from": {
-            "key_code": "slash",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
-            }
-          ],
-          "to_after_key_up": [
-            {
-              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
-            }
-          ]
-        },
-        {
-          "type": "basic",
           "conditions": [
             {
               "type": "variable_if",
@@ -1181,6 +1080,100 @@
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
           }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "japanese_kana",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_command"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "return_or_enter"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200
+          }
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "b"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "any",
+              "to_after_key_up": [
+                {
+                  "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
+                }
+              ]
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "f_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 350
+          }
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "f_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
+            }
+          ]
         }
       ]
     }

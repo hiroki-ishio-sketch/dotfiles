@@ -83,6 +83,7 @@ for expected in \
   '"key_code": "k"' \
   '"key_code": "l"' \
   '"key_code": "a"' \
+  '"key_code": "b"' \
   '"key_code": "tab"' \
   '"key_code": "e"' \
   '"key_code": "m"' \
