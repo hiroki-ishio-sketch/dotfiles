@@ -30,6 +30,7 @@ for expected in \
   "brew install neovim starship fzf ripgrep fd lazygit deno gh node php w3m coreutils" \
   "brew install --cask wezterm font-udev-gothic-nf" \
   "bash $ROOT_DIR/dry-run-dotfiles/.bin/install-janky-borders.sh" \
+  "bash $ROOT_DIR/dry-run-dotfiles/.bin/install-karabiner.sh" \
   "nvim --headless" \
   "git clone https://github.com/xdebug/vscode-php-debug.git $ROOT_DIR/dry-run-home/vscode-php-debug" \
   "npm --prefix $ROOT_DIR/dry-run-home/vscode-php-debug install" \

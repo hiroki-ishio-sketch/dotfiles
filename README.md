@@ -24,7 +24,7 @@ curl -fsSL https://raw.githubusercontent.com/ishiooon/dotfiles/main/.bin/bootstr
 bash /tmp/bootstrap-macos.sh
 ```
 
-このスクリプトは、Homebrew、シェル設定、Neovim、Starship、WezTerm、UDEV Gothic NF、JankyBorders、Codex の管理対象設定をまとめて導入します。Neovim のプラグインと PHP デバッグ拡張も初回に準備し、dotfiles を `~/dotfiles` に clone して設定をリンクします。既に `~/dotfiles` が Git リポジトリの場合はその内容を使用し、Git リポジトリではない既存ディレクトリは上書きせずに中断します。
+このスクリプトは、Homebrew、シェル設定、Neovim、Starship、WezTerm、UDEV Gothic NF、JankyBorders、Karabiner-Elements、Codex の管理対象設定をまとめて導入します。Neovim のプラグインと PHP デバッグ拡張も初回に準備し、dotfiles を `~/dotfiles` に clone して設定をリンクします。既に `~/dotfiles` が Git リポジトリの場合はその内容を使用し、Git リポジトリではない既存ディレクトリは上書きせずに中断します。
 
 導入前の手順確認には、次のドライランを使用できます。
 
@@ -47,7 +47,7 @@ bash ~/dotfiles/.bin/install.sh --env=localdev --dry-run
 この「設定をリンクする」とは、設定を二重にコピーするのではなく、ホームディレクトリから dotfiles 内の管理対象を参照することです。対象は次のとおりです。
 
 - `~/.zshrc`、`~/.bashrc`、`.zsh`、`.bash`
-- `~/.config`（Neovim、Starship、WezTerm、JankyBorders、lazygit）
+- `~/.config`（Neovim、Starship、WezTerm、JankyBorders、Karabiner-Elements、lazygit）
 - `~/.bin`、`~/.claude`、`~/.agents`
 - `~/.codex/AGENTS.md`、`~/.codex/agents`（認証情報や履歴は対象外）
 
@@ -100,6 +100,22 @@ ln -s ~/dotfiles/.config/mcphub ~/.config/mcphub
 #### 4. JankyBorders のインストール
 フォーカス中のウィンドウを枠線で見分けるため、JankyBorders の設定を dotfiles で管理します。設定の実体は `.config/borders/bordersrc` です。
 導入前確認は `bash .bin/install-janky-borders.sh --dry-run`、導入は `bash .bin/install-janky-borders.sh`、設定変更後の再読み込みは `brew services restart borders` です。
+
+#### 5. Karabiner-Elements のインストール
+`f` と同時に押した `hjkl` / `e` はすぐ矢印・Delete になり、長押し後の連続入力にも対応します。`f` + `b` 長押し中だけ、JIS 配列（return 形状含む）の全キーとレイヤー一覧 HUD（JS 実装）を表示します。`英数` / `かな` は短押しで Enter、長押しで ⌘。`f` + `n` で ABC、`f` + `m` で あいう。`space` は短押しでスペース、長押しで Shift です。レイヤー定義は `.config/karabiner/keymap-layers.json`、Karabiner 本体は `.config/karabiner/karabiner.json`、HUD は `.bin/karabiner-keymap-hud` と `.config/karabiner/scripts/keymap-hud.{js,html}` です。HUD は物理 JIS 配列で表示し、常駐デーモン化して `f+b` で即時に出します。英字入力は入力ソース `ABC`（US）を使えます。初回のみ `bash ~/.bin/karabiner-keymap-hud start` でデーモンを起動してください。
+
+| キー | 動作 |
+| --- | --- |
+| `f` + `h` | ← |
+| `f` + `j` | ↓ |
+| `f` + `k` | ↑ |
+| `f` + `l` | → |
+| `f` + `e` | Delete |
+| `f` + `m` | キーマップ一覧を表示（押している間） |
+
+`Command + Tab` 中は、物理の `Command` を維持したまま矢印だけを送るルールを使います。`Command` を押したまま `f` を押し、`hjkl` で移動してください。
+
+導入前確認は `bash .bin/install-karabiner.sh --dry-run`、導入は `bash .bin/install-karabiner.sh` です。初回はシステム設定で Input Monitoring とアクセシビリティの許可が必要です。許可後に Karabiner-Elements を起動すると設定が有効になります。
 
 ## セットアップ
 
@@ -178,6 +194,7 @@ ln -s ~/dotfiles/.config/mcphub ~/.config/mcphub
 
 .config/
 ├── borders/                # JankyBordersの設定
+├── karabiner/              # Karabiner-Elements（f+hjkl→矢印）の設定
 ├── nvim/                   # Neovimの設定
 ├── wezterm/                # WezTermの設定
 └── starship.toml           # starshipの設定
