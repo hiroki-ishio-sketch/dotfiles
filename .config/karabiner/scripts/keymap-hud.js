@@ -60,8 +60,9 @@ function run(argv) {
   const app = $.NSApplication.sharedApplication;
   app.setActivationPolicy($.NSApplicationActivationPolicyAccessory);
 
-  const width = 1080;
-  const height = 860;
+  // 2×2 レイヤーグリッドが収まるサイズ（JIS キーボード×最大4枚）
+  const width = 1280;
+  const height = 780;
   const panel = $.NSPanel.alloc.initWithContentRectStyleMaskBackingDefer(
     $.NSMakeRect(0, 0, width, height),
     $.NSWindowStyleMaskBorderless | $.NSWindowStyleMaskNonactivatingPanel,

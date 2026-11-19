@@ -1178,6 +1178,1400 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "description": "d layer: n m , j k l u i o p → 1-0 number pad",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "d"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 200
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "n"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "1"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "1"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "m"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "2"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "2"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "comma"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "3"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "3"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "j"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "4"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "k"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "5"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "5"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "l"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "6"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "6"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "u"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "7"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "7"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "i"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "8"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "8"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "o"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "9"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "d"
+                                        },
+                                        {
+                                            "key_code": "p"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "d_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "0"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "d_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "0"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "v layer: punctuation + h→~ + y→¥",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "v"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 200
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "n"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "comma"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "comma"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "m"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "period"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "period"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "comma"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "slash"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "slash"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "j"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "semicolon"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "semicolon"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "k"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "quote"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "quote"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "l"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "backslash"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "backslash"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "u"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "hyphen"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "i"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "equal_sign"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "o"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "open_bracket"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "p"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "close_bracket"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "h"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "v"
+                                        },
+                                        {
+                                            "key_code": "y"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "strict",
+                                        "key_up_when": "all"
+                                    },
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "v_held",
+                                            "value": true,
+                                            "key_up_value": false
+                                        }
+                                    },
+                                    {
+                                        "key_code": "international3"
+                                    }
+                                ],
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 250
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "v_held",
+                                        "value": true
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "international3"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
