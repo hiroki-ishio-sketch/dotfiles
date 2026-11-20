@@ -23,9 +23,9 @@
       --aqua: #89b482;
       --blue: #7daea3;
       --purple: #d3869b;
-      --unit: 42px;
-      --gap: 5px;
-      --key-h: 40px;
+      --unit: 34px;
+      --gap: 4px;
+      --key-h: 32px;
     }
     * { box-sizing: border-box; }
     html, body {
@@ -51,8 +51,9 @@
       border: 1px solid rgba(212, 190, 152, 0.12);
       border-radius: 18px;
       box-shadow: 0 24px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(212,190,152,0.08);
-      min-width: 1000px;
+      min-width: 0;
       width: max-content;
+      max-width: 1280px;
       opacity: 0;
       transform: translateY(8px) scale(0.985);
       animation: rise 160ms ease-out forwards;
@@ -65,23 +66,31 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     h1 {
       margin: 0;
-      font-size: 19px;
+      font-size: 17px;
       letter-spacing: 0.01em;
       color: var(--yellow);
       font-weight: 700;
     }
     .sub { color: var(--grey1); font-size: 12px; }
-    .layers { display: grid; gap: 14px; }
+    .layers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 10px;
+      align-items: start;
+    }
     .board {
       background: rgba(50, 48, 47, 0.55);
       border: 1px solid rgba(60, 56, 54, 0.8);
-      border-radius: 14px;
-      padding: 12px 14px 14px;
+      border-radius: 12px;
+      padding: 10px 10px 10px;
       box-shadow: inset 0 1px 0 rgba(212,190,152,0.04);
+      min-width: 0;
+      overflow: hidden;
     }
     .board.active {
       border-color: rgba(216, 166, 87, 0.45);
@@ -91,17 +100,28 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
+      gap: 8px;
+      margin-bottom: 8px;
+      min-width: 0;
     }
-    .board-title { font-size: 14px; font-weight: 700; color: var(--fg1); }
+    .board-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--fg1);
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
     .board.active .board-title { color: var(--yellow); }
     .board-summary {
       color: var(--grey1);
-      font-size: 11px;
+      font-size: 10px;
       font-variant-numeric: tabular-nums;
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       text-align: right;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .keyboard {
       display: grid;
@@ -132,7 +152,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 650;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--fg0);
       flex: 0 0 auto;
       overflow: hidden;
@@ -320,7 +340,7 @@
       if (options.jisReturn) keyEl.classList.add("jis-return");
       if (key === "]") keyEl.classList.add("bracket-close");
       if (key === "space") keyEl.classList.add("space");
-      if (key === "f" && layer.id === "f") keyEl.classList.add("holder");
+      if (key === layer.id) keyEl.classList.add("holder");
       if (mapped) keyEl.classList.add("mapped");
 
       const mods = new Set([
@@ -330,7 +350,9 @@
       ]);
       if (mods.has(key)) keyEl.classList.add("mod");
 
-      const shift = def.shift_labels && def.shift_labels[key];
+      // 出力キーに対応する Shift 記号があるなら上段に出す（数字・,./ など）
+      const mappedShift = mapped && ((def.us_shift_labels && def.us_shift_labels[mapped]) || (def.shift_labels && def.shift_labels[mapped]));
+      const shift = !mappedShift && def.shift_labels && def.shift_labels[key];
       if (shift) {
         const shiftEl = document.createElement("div");
         shiftEl.className = "shift";
@@ -379,14 +401,25 @@
       }
 
       if (mapped) {
-        const base = document.createElement("div");
-        base.className = "base";
-        base.textContent = displayName(key, def);
-        const action = document.createElement("div");
-        action.className = "action";
-        action.textContent = mapped;
-        keyEl.appendChild(base);
-        keyEl.appendChild(action);
+        if (mappedShift) {
+          const shiftEl = document.createElement("div");
+          shiftEl.className = "shift";
+          shiftEl.textContent = mappedShift;
+          keyEl.appendChild(shiftEl);
+          const action = document.createElement("div");
+          action.className = "action";
+          action.textContent = mapped;
+          keyEl.appendChild(action);
+        } else {
+          const base = document.createElement("div");
+          base.className = "base";
+          base.textContent = displayName(key, def);
+          const action = document.createElement("div");
+          action.className = "action";
+          action.textContent = mapped;
+          keyEl.appendChild(base);
+          keyEl.appendChild(action);
+        }
       } else if (key !== "space") {
         const name = displayName(key, def);
         if (!name && !glyph) {

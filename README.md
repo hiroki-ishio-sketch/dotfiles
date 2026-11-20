@@ -102,7 +102,7 @@ ln -s ~/dotfiles/.config/mcphub ~/.config/mcphub
 導入前確認は `bash .bin/install-janky-borders.sh --dry-run`、導入は `bash .bin/install-janky-borders.sh`、設定変更後の再読み込みは `brew services restart borders` です。
 
 #### 5. Karabiner-Elements のインストール
-`f` と同時に押した `hjkl` / `e` はすぐ矢印・Delete になり、長押し後の連続入力にも対応します。`f` + `b` 長押し中だけ、JIS 配列（return 形状含む）の全キーとレイヤー一覧 HUD（JS 実装）を表示します。`英数` / `かな` は短押しで Enter、長押しで ⌘。`f` + `n` で ABC、`f` + `m` で あいう。`space` は短押しでスペース、長押しで Shift です。レイヤー定義は `.config/karabiner/keymap-layers.json`、Karabiner 本体は `.config/karabiner/karabiner.json`、HUD は `.bin/karabiner-keymap-hud` と `.config/karabiner/scripts/keymap-hud.{js,html}` です。HUD は物理 JIS 配列で表示し、常駐デーモン化して `f+b` で即時に出します。英字入力は入力ソース `ABC`（US）を使えます。初回のみ `bash ~/.bin/karabiner-keymap-hud start` でデーモンを起動してください。
+`d` 押し込み中は `n m , j k l u i o p` が `1-0` になります。`v` 押し込み中は `n m ,` が `, . /`、`j k l u i o p` が `; ' \\ - = [ ]` になります。`f` と同時に押した `hjkl` / `e` はすぐ矢印・Delete になり、長押し後の連続入力にも対応します。`f` + `b` 長押し中だけ、JIS 配列（return 形状含む）の全キーとレイヤー一覧 HUD（JS 実装）を表示します。`英数` / `かな` は短押しで Enter、長押しで ⌘。`f` + `n` で ABC、`f` + `m` で あいう。`space` は短押しでスペース、長押しで Shift です。レイヤー定義は `.config/karabiner/keymap-layers.json`、Karabiner 本体は `.config/karabiner/karabiner.json`、HUD は `.bin/karabiner-keymap-hud` と `.config/karabiner/scripts/keymap-hud.{js,html}` です。HUD は物理 JIS 配列で表示し、常駐デーモン化して `f+b` で即時に出します。英字入力は入力ソース `ABC`（US）を使えます。初回のみ `bash ~/.bin/karabiner-keymap-hud start` でデーモンを起動してください。
 
 | キー | 動作 |
 | --- | --- |

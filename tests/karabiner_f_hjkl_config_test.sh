@@ -105,7 +105,15 @@ for expected in \
   'japanese_kana' \
   'return_or_enter' \
   'left_shift' \
-  'spacebar'; do
+  'spacebar' \
+  '"name": "d_held"' \
+  '"key_code": "d"' \
+  '"key_code": "comma"' \
+  '"key_code": "1"' \
+  '"key_code": "0"' \
+  'd layer' \
+  '"name": "v_held"' \
+  'v layer'; do
   if ! grep -Fq "$expected" "$CONFIG_FILE"; then
     echo "Karabiner 設定に期待した定義が含まれていません: $expected" >&2
     exit 1
