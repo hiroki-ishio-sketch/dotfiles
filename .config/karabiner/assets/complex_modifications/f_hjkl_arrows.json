@@ -1226,7 +1226,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1286,7 +1287,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1346,7 +1348,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1406,7 +1409,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1466,7 +1470,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1526,7 +1531,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1586,7 +1592,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1646,7 +1653,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1706,7 +1714,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1766,7 +1775,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1860,7 +1870,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1920,7 +1931,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -1980,7 +1992,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2040,7 +2053,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2100,7 +2114,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2160,7 +2175,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2220,7 +2236,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2280,7 +2297,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2340,7 +2358,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2400,7 +2419,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2460,7 +2480,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
@@ -2526,7 +2547,8 @@
             },
             "modifiers": {
               "optional": [
-                "any"
+                "caps_lock",
+                "shift"
               ]
             }
           },
