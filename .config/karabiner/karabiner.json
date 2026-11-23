@@ -2599,6 +2599,12 @@
             },
             "name": "Default profile",
             "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "international1" },
+                    "to": [{ "key_code": "hyphen" }]
+                }
+            ],
             "virtual_hid_keyboard": {
                 "keyboard_type_v2": "ansi"
             }
