@@ -60,7 +60,7 @@ const options = {
   layers: [{ name: '通常', bindings: { left: 'F', right: 'B' } }, { name: '数字', bindings: { left: '1', right: '0' } }],
 };
 const { window, layers, heading, sub } = openKeymap(options);
-assert.equal(layers.children.length, 4, '最初は従来のJISレイヤーを表示する');
+assert.equal(layers.children.length, 6, '最初はJISの base/f/d/v/c/x レイヤーを表示する');
 window.__TORABO_BATTERY_SUBTITLE__ = '右 80% · 左 70%';
 window.showKeymap('torabo');
 assert.equal(heading.textContent, 'Torabo-tsuki (S)');
@@ -79,7 +79,7 @@ assert.equal(secondBoard.children[1].children[0].textContent, '1');
 
 window.showKeymap('jis');
 assert.match(heading.textContent, /JIS/);
-assert.equal(layers.children.length, 4, '切断後は従来のJISレイヤーへ戻る');
+assert.equal(layers.children.length, 6, '切断後はJISの base/f/d/v/c/x レイヤーへ戻る');
 
 const manyLayers = openKeymap({ ...options, layers: Array.from({ length: 16 }, (_, index) => ({
   name: `レイヤー${index}`, bindings: { left: '<設定>', right: 'F12' },
@@ -94,7 +94,7 @@ for (const definition of [undefined, { ...options, keys: [] }, { ...options, lay
   const hud = openKeymap(definition);
   hud.window.showKeymap('torabo');
   assert.match(hud.heading.textContent, /JIS/);
-  assert.equal(hud.layers.children.length, 4, 'Toraboの表示データがなければJISを維持する');
+  assert.equal(hud.layers.children.length, 6, 'Toraboの表示データがなければJISを維持する');
 }
 console.log('成功: 接続状態に応じてTorabo-tsuki (S)とJISの表示が切り替わります。');
 JS
