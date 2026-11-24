@@ -59,6 +59,18 @@ assert_not_ignored ".config/karabiner/karabiner.json"
 assert_not_ignored ".config/karabiner/assets/complex_modifications/f_hjkl_arrows.json"
 assert_ignored ".config/karabiner/automatic_backups/example.json"
 
+# Toraboは編集用のソースだけを共有し、接続情報を含み得る復旧データや生成物は除外する。
+assert_not_ignored ".config/torabo-zmk/config/torabo_tsuki.keymap"
+assert_not_ignored ".config/torabo-zmk/config/torabo_tsuki.conf"
+assert_not_ignored ".config/torabo-zmk/config/ble_micro_pro.overlay"
+assert_not_ignored ".config/torabo-zmk/build-local.sh"
+assert_ignored ".config/torabo-zmk/backup/right/EEPROM.BIN"
+assert_ignored ".config/torabo-zmk/config/CONFIG.BIN"
+assert_ignored ".config/torabo-zmk/firmware/torabo-tsuki-s-right-central.uf2"
+
+assert_not_ignored ".github/workflows/torabo-zmk.yml"
+assert_ignored ".github/backup/device.bin"
+
 # SketchyBar の利用を終了したため、古い設定とプラグインが共有対象へ戻らないことを検証する。
 assert_ignored ".config/sketchybar/sketchybarrc"
 assert_ignored ".config/sketchybar/colors.sh"

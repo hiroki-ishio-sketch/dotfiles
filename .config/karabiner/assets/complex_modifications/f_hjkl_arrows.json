@@ -2,6 +2,44 @@
   "title": "f layer + d number pad + v punctuation + 英数/かな/space tap-hold",
   "rules": [
     {
+        "description": "Torabo-tsuki (S) の f 長押し中に b を押してキー一覧を表示する",
+        "manipulators": [
+            {
+                "type": "basic",
+                "from": {
+                    "key_code": "f24",
+                    "modifiers": {
+                        "optional": [
+                            "any"
+                        ]
+                    }
+                },
+                "conditions": [
+                    {
+                        "type": "device_if",
+                        "identifiers": [
+                            {
+                                "vendor_id": 65261,
+                                "product_id": 48301,
+                                "is_keyboard": true
+                            }
+                        ]
+                    }
+                ],
+                "to": [
+                    {
+                        "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
+                    }
+                ],
+                "to_after_key_up": [
+                    {
+                        "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
+                    }
+                ]
+            }
+        ]
+    },
+    {
       "description": "f layer; f+n=ABC f+m=あいう; f+b=HUD; 英数 tap=Enter hold=⌘; f↔英数 either order +a = app switcher; space hold=Shift",
       "manipulators": [
         {

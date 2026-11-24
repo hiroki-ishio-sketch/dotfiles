@@ -3,7 +3,7 @@
 // 常駐 HUD デーモン（JS）。
 // Usage:
 //   osascript -l JavaScript keymap-hud.js daemon <htmlPath> <jsonPath> <pidPath> <cmdPath>
-// show/hide は cmdPath に "show" / "hide" を書く。
+// cmdPath の表示指示に従い、内蔵キーボードまたは Torabo-tsuki のキー一覧を表示する。
 
 ObjC.import("Cocoa");
 ObjC.import("WebKit");
@@ -33,12 +33,29 @@ function writeText(path, text) {
   );
 }
 
-function buildHtmlDocument(html, jsonText) {
-  const injection = `<script>window.__KEYMAP_LAYERS__ = ${jsonText};</script>`;
+function buildHtmlDocument(html, jsonText, toraboModel) {
+  // JSON の文字列に HTML の終了タグがあっても、スクリプトの外へ出ないようにする。
+  const embedded = JSON.stringify(JSON.parse(jsonText)).replace(/</g, "\\u003c");
+  const injection = `<script>window.__KEYMAP_LAYERS__ = ${embedded};</script><script>${toraboModel}</script>`;
   if (html.indexOf("</head>") !== -1) {
-    return html.replace("</head>", `${injection}\n</head>`);
+    return html.replace("</head>", () => `${injection}\n</head>`);
   }
   return `${injection}\n${html}`;
+}
+
+function keymapDisplayScript(command, path) {
+  const showJis = 'window.showKeymap("jis")';
+  if (command !== "show torabo") return showJis;
+  try {
+    // 表示のたびに編集用 JSON を読み込む。欠損や不正値があれば内蔵用の表示を使う。
+    const definition = JSON.stringify(JSON.parse(readText(path)));
+    return `try {
+      window.__TORABO_KEYMAP__ = buildToraboKeymap(JSON.parse(${JSON.stringify(definition)}));
+      window.showKeymap("torabo");
+    } catch (error) { ${showJis}; }`;
+  } catch (error) {
+    return showJis;
+  }
 }
 
 function run(argv) {
@@ -52,8 +69,11 @@ function run(argv) {
 
   const html = readText(htmlPath);
   const jsonText = readText(jsonPath);
-  JSON.parse(jsonText);
-  const documentHtml = buildHtmlDocument(html, jsonText);
+  const configDir = jsonPath.slice(0, jsonPath.lastIndexOf("/") + 1);
+  const modelPath = htmlPath.replace(/[^/]+$/, "torabo-keymap-model.js");
+  let toraboModel = "";
+  try { toraboModel = readText(modelPath); } catch (error) {}
+  const documentHtml = buildHtmlDocument(html, jsonText, toraboModel);
   writeText(pidPath, `${$.NSProcessInfo.processInfo.processIdentifier}\n`);
   writeText(cmdPath, "idle\n");
 
@@ -70,6 +90,7 @@ function run(argv) {
     false
   );
   panel.setLevel($.NSFloatingWindowLevel);
+  panel.setAlphaValue(0);
   panel.setOpaque(false);
   panel.setBackgroundColor($.NSColor.clearColor);
   panel.setHasShadow(true);
@@ -93,7 +114,6 @@ function run(argv) {
   panel.center;
   panel.orderOut(null);
 
-  let visible = false;
   let lastCmd = "idle";
 
   function applyCommand(raw) {
@@ -102,12 +122,21 @@ function run(argv) {
       return;
     }
     lastCmd = cmd;
-    if (cmd === "show") {
-      panel.orderFrontRegardless();
-      visible = true;
+    if (cmd === "show" || cmd === "show torabo") {
+      // 表示内容を切り替えてからパネルを開く。
+      webView.evaluateJavaScriptCompletionHandler(
+        keymapDisplayScript(cmd, configDir + "torabo-tsuki-s.json"),
+        function () {
+          // 読み込み中にキーが離された場合は、すでに非表示になったパネルを開き直さない。
+          if (lastCmd === cmd) {
+            panel.setAlphaValue(1);
+            panel.orderFrontRegardless;
+          }
+        }
+      );
     } else if (cmd === "hide") {
+      panel.setAlphaValue(0);
       panel.orderOut(null);
-      visible = false;
       writeText(cmdPath, "idle\n");
       lastCmd = "idle";
     } else if (cmd === "quit") {
@@ -116,13 +145,14 @@ function run(argv) {
     }
   }
 
-  // ファイルポーリング。block タイマーは環境によって落ちるため runloop + delayed perform を使う。
-  const checker = $.NSObject.alloc.init;
+  // コマンドファイルを定期的に確認し、表示や終了の指示を反映する。
   function tick() {
     try {
       const raw = readText(cmdPath);
       applyCommand(raw);
-    } catch (e) {}
+    } catch (error) {
+      console.log(`キー一覧の指示を処理できませんでした。${error.message}`);
+    }
     $.NSTimer.scheduledTimerWithTimeIntervalRepeatsBlock(0.03, false, function () {
       tick();
     });

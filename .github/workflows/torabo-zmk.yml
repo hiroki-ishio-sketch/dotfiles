@@ -1,0 +1,47 @@
+name: Torabo-tsuki S ファームウェア
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/torabo-zmk.yml'
+      - '.config/torabo-zmk/**'
+      - '.config/karabiner/**'
+      - 'tests/torabo_zmk_*'
+  pull_request:
+    paths:
+      - '.github/workflows/torabo-zmk.yml'
+      - '.config/torabo-zmk/**'
+      - '.config/karabiner/**'
+      - 'tests/torabo_zmk_*'
+
+# ソースの取得と成果物の登録だけを行う。
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: キー割り当てと設定を検証
+        run: |
+          bash tests/torabo_zmk_keymap_test.sh --env=localdev
+          bash tests/torabo_zmk_configuration_test.sh --env=localdev
+          bash tests/torabo_zmk_build_portability_test.sh --env=localdev
+      - name: 左右のファームウェアをビルド
+        run: |
+          bash .config/torabo-zmk/build-local.sh "$RUNNER_TEMP/torabo-zmk"
+      - name: ビルド結果を保存
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: torabo-tsuki-s-firmware
+          path: |
+            ${{ runner.temp }}/torabo-zmk/firmware/torabo-tsuki-s-right-central.uf2
+            ${{ runner.temp }}/torabo-zmk/firmware/torabo-tsuki-s-left-peripheral.uf2
+            ${{ runner.temp }}/torabo-zmk/resolved-west.yml
+          if-no-files-found: error

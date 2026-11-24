@@ -2,8 +2,9 @@
 set -euo pipefail
 
 # 常駐 JS HUD を show/hide する。初回だけ起動し、以降は即時表示。
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+# ~/.bin とリポジトリのどちらから呼んでも、同じパスで常駐プログラムを参照する。
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+readonly DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd -P)"
 readonly HUD_JS="${KARABINER_KEYMAP_HUD_JS:-$DOTFILES_DIR/.config/karabiner/scripts/keymap-hud.js}"
 readonly HUD_HTML="${KARABINER_KEYMAP_HUD_HTML:-$DOTFILES_DIR/.config/karabiner/scripts/keymap-hud.html}"
 readonly LAYERS_JSON="${KARABINER_KEYMAP_LAYERS_JSON:-$DOTFILES_DIR/.config/karabiner/keymap-layers.json}"
@@ -11,12 +12,13 @@ readonly STATE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/karabiner-keymap-hud"
 readonly PID_FILE="$STATE_DIR/daemon.pid"
 readonly CMD_FILE="$STATE_DIR/command"
 readonly LOG_FILE="$STATE_DIR/hud.log"
+readonly HIDUTIL="${KARABINER_HUD_HIDUTIL:-/usr/bin/hidutil}"
 
 usage() {
   cat <<'USAGE'
 Usage: karabiner-keymap-hud show|hide|status|start|stop
 
-常駐 JS HUD を表示/非表示します。f+m 用。
+f + b で使用するキー一覧を表示または非表示にします。
 USAGE
 }
 
@@ -66,7 +68,17 @@ start_daemon() {
 
 show_hud() {
   start_daemon
-  printf 'show\n' >"$CMD_FILE"
+  local display=show
+  if torabo_connected; then display='show torabo'; fi
+  printf '%s\n' "$display" >"$CMD_FILE"
+}
+
+torabo_connected() {
+  local devices
+  # USB と Bluetooth で共通の機器番号を使い、トラックボールだけの項目は数えない。
+  devices="$("$HIDUTIL" list --matching '{"VendorID":65261,"ProductID":48301,"PrimaryUsagePage":1,"PrimaryUsage":6}' 2>/dev/null)" ||
+    return 1
+  /usr/bin/awk 'tolower($1) == "0xfeed" && tolower($2) == "0xbcad" && $4 == "1" && $5 == "6" { found = 1 } END { exit !found }' <<<"$devices"
 }
 
 hide_hud() {

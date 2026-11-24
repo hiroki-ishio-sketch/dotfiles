@@ -1,0 +1,136 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+#include "torabo-pointing.dtsi"
+
+/ {
+    chosen {
+        zmk,physical-layout = &physical_layout_s;
+    };
+
+    behaviors {
+        // Vialのマクロと同じ順にCtrlを押し、Spaceを20ミリ秒だけ押して両方を解放する。
+        ZMK_MACRO(ctrl_space,
+            wait-ms = <0>;
+            tap-ms = <20>;
+            bindings = <&macro_press &kp LCTRL>,
+                       <&macro_tap &kp SPACE>,
+                       <&macro_release &kp LCTRL>;
+        )
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // メーカーのS配列の順序に合わせ、各行を左手の外側から右手の外側へ並べる。
+        layer_0 {
+            display-name = "基本";
+            bindings = <
+                &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y  &kp U  &lt 1 I  &kp O  &none
+                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &lt 1 K  &lt 1 L  &kp P
+                &kp Z  &kp X  &lt 5 C  &lt 4 V  &lt 6 B    &none  &kp N  &kp M  &none  &to 1
+                &trans  &kp LGUI  &kp LALT  &kp LCTRL  &mt LGUI RET  &mt LSHFT SPACE    &mt RSHFT SPACE  &mt RGUI KP_ENTER  &none  &none  &none  &lt 1 I
+            >;
+        };
+
+        layer_1 {
+            display-name = "マウス";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &mkp MB5  &trans
+                &trans  &trans  &trans  &trans  &trans    &mkp MB4  &mkp LCLK  &mo 8  &mkp RCLK  &mkp RCLK
+                &trans  &trans  &trans  &trans  &trans    &trans  &mo 8  &mkp LCLK  &trans  &to 0
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &mo 8
+            >;
+        };
+
+        // 左手のFを保持してBを押すと、Macでキー一覧を開くF24を送る。
+        layer_2 {
+            display-name = "移動";
+            bindings = <
+                &kp ESC  &trans  &kp BSPC  &trans  &trans    &trans  &kp BSPC  &trans  &trans  &kp DEL
+                &kp TAB  &kp TAB  &kp LGUI  &trans  &trans    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans
+                &trans  &trans  &trans  &trans  &kp F24    &trans  &ctrl_space  &ctrl_space  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_3 {
+            display-name = "数字";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp N7  &kp N8  &kp N9  &none
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp N4  &kp N5  &kp N6  &kp N0
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp N1  &kp N2  &kp N3  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_4 {
+            display-name = "記号";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &trans
+                &trans  &trans  &trans  &trans  &trans    &kp INTERNATIONAL_3  &kp SEMI  &kp SQT  &kp NON_US_HASH  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp COMMA  &kp DOT  &kp FSLH  &kp INTERNATIONAL_1
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        layer_5 {
+            display-name = "機能";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp F7  &kp F8  &kp F9  &kp F10
+                &trans  &trans  &trans  &trans  &trans    &kp F12  &kp F4  &kp F5  &kp F6  &kp F11
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp F1  &kp F2  &kp F3  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        // このZMK版が送信できるConsumerページの電源とスリープを使用する。
+        layer_6 {
+            display-name = "記号・電源";
+            bindings = <
+                &kp C_POWER  &trans  &trans  &trans  &trans    &kp EQUAL  &kp BSPC  &kp MINUS  &kp GRAVE  &kp C_SLEEP
+                &kp N1  &trans  &kp C_SLEEP  &kp C_SLEEP  &trans    &kp LS(BSLH)  &kp RBKT  &kp RBKT  &kp NON_US_HASH  &kp FSLH
+                &trans  &kp C_EJECT  &kp LGUI  &kp LALT  &trans    &kp BSLH  &kp SQT  &kp LBKT  &kp NON_US_BSLH  &kp INTERNATIONAL_1
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &kp SQT  &kp INTERNATIONAL_1  &trans
+            >;
+        };
+
+        layer_7 {
+            display-name = "マウス固定";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB4  &trans  &mkp MB5  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &mkp LCLK  &mo 8  &mkp RCLK  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &mo 8
+            >;
+        };
+
+        // スクロールキーを保持している間だけこのレイヤーでボールをホイールとして扱う。
+        drag_scroll {
+            display-name = "スクロール";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+    };
+};
+
+// このキーマップはS配列専用なので、StudioでMやLを選択して割り当てがずれるのを防ぐ。
+&physical_layout_m { status = "disabled"; };
+&physical_layout_l { status = "disabled"; };
+
+// QMK実機から読み取った255ミリ秒と、レイヤーおよび修飾キーそれぞれの割り込み判定を再現する。
+&lt {
+    tapping-term-ms = <255>;
+    quick-tap-ms = <255>;
+    flavor = "hold-preferred";
+};
+
+&mt {
+    tapping-term-ms = <255>;
+    quick-tap-ms = <255>;
+    flavor = "balanced";
+};

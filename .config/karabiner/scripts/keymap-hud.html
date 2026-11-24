@@ -298,12 +298,42 @@
     .swatch.holder { background: #a04300; }
     .swatch.mapped { background: #556340; }
     .swatch.normal { background: #3c3836; }
+    /* 分割配列はキーの座標を保ち、レイヤー数が多い場合も全体が画面の幅と高さに収まるようにする。 */
+    .torabo-keymap .shell { width: min(1240px, 100vw); }
+    .torabo-keymap .layers {
+      grid-template-columns: repeat(var(--torabo-columns), minmax(0, 1fr));
+      grid-template-rows: none;
+      --torabo-board-width: calc((min(1240px, 100vw) - 46px - (var(--torabo-columns) - 1) * 10px) / var(--torabo-columns) - 22px);
+      --torabo-board-height: calc((100vh - 76px - (var(--torabo-rows) - 1) * 10px) / var(--torabo-rows) - 50px);
+      --torabo-unit: min(34px, calc(var(--torabo-board-width) / var(--torabo-width)), calc(var(--torabo-board-height) / var(--torabo-height)));
+    }
+    .torabo-geometry {
+      position: relative;
+      margin: 0 auto;
+      width: calc(var(--torabo-unit) * var(--torabo-width));
+      height: calc(var(--torabo-unit) * var(--torabo-height));
+    }
+    .torabo-geometry .key {
+      position: absolute;
+      left: calc(var(--torabo-unit) * var(--key-x));
+      top: calc(var(--torabo-unit) * var(--key-y));
+      width: calc(var(--torabo-unit) - 2px);
+      height: calc(var(--torabo-unit) - 2px);
+      padding: 1px 2px;
+      border-radius: 4px;
+      white-space: pre-line;
+      text-align: center;
+      overflow-wrap: anywhere;
+      line-height: 1.05;
+      font-size: clamp(8px, calc(var(--torabo-unit) * 0.32), 11px);
+    }
+    .torabo-geometry .key[data-long-label] { font-size: clamp(7px, calc(var(--torabo-unit) * 0.28), 9px); }
   </style>
 </head>
 <body>
   <div class="shell">
     <div class="header">
-      <h1>Keymap Layers · JIS shape / US legends</h1>
+      <h1 id="keymap-title">Keymap Layers · JIS shape / US legends</h1>
       <div class="sub">f + b で表示 · 離すと閉じる · Gruvbox Material</div>
     </div>
     <div class="layers" id="layers"></div>
@@ -439,23 +469,11 @@
     }
 
     function renderLayer(layer, def) {
-      const board = document.createElement("section");
-      board.className = "board" + (layer.id === "f" ? " active" : "");
-
-      const head = document.createElement("div");
-      head.className = "board-head";
-      const title = document.createElement("div");
-      title.className = "board-title";
-      title.textContent = `${layer.name}  ·  ${layer.trigger}`;
-      const summary = document.createElement("div");
-      summary.className = "board-summary";
       const bindings = layer.bindings || {};
-      summary.textContent = Object.keys(bindings).length === 0
+      const summary = Object.keys(bindings).length === 0
         ? "JIS 形状 · US 刻印"
         : Object.keys(bindings).sort().map((key) => `${displayName(key, def)}→${bindings[key]}`).join("   ");
-      head.appendChild(title);
-      head.appendChild(summary);
-      board.appendChild(head);
+      const board = createBoard(`${layer.name}  ·  ${layer.trigger}`, summary, layer.id === "f");
 
       const keyboard = document.createElement("div");
       keyboard.className = "keyboard";
@@ -486,17 +504,88 @@
       return board;
     }
 
-    function main() {
-      const def = window.__KEYMAP_LAYERS__;
-      if (!def) throw new Error("window.__KEYMAP_LAYERS__ is missing");
+    // 常駐処理から表示する配列を受け取り、現在の画面を差し替える。
+    function showKeymap(profile) {
       const root = document.getElementById("layers");
+      const title = document.querySelector("#keymap-title");
+      const split = profile === "torabo" ? window.__TORABO_KEYMAP__ : null;
+      const useSplit = Boolean(split && Array.isArray(split.keys) && split.keys.length &&
+        split.keys.every((key) => key && Number.isFinite(key.x) && Number.isFinite(key.y)) &&
+        Array.isArray(split.layers) && split.layers.length && split.layers.every((layer) => layer && typeof layer.name === "string"));
+      document.body.classList.toggle("torabo-keymap", useSplit);
       root.replaceChildren();
+      if (useSplit) {
+        title.textContent = split.name || "Torabo-tsuki (S)";
+        renderToraboKeymap(root, split);
+        return "torabo";
+      }
+      const def = window.__KEYMAP_LAYERS__;
+      if (!def) throw new Error("JISの配列データがありません。");
+      title.textContent = "Keymap Layers · JIS shape / US legends";
       for (const layer of def.layers) root.appendChild(renderLayer(layer, def));
+      return "jis";
     }
 
-    try { main(); }
+    function renderToraboKeymap(root, definition) {
+      const horizontal = definition.keys.map((key) => key.x);
+      const vertical = definition.keys.map((key) => key.y);
+      const left = Math.min(...horizontal);
+      const top = Math.min(...vertical);
+      const columns = Math.min(4, Math.ceil(Math.sqrt(definition.layers.length)));
+      root.style.setProperty("--torabo-columns", String(columns));
+      root.style.setProperty("--torabo-rows", String(Math.ceil(definition.layers.length / columns)));
+      root.style.setProperty("--torabo-width", String(Math.max(...horizontal) - left + 1));
+      root.style.setProperty("--torabo-height", String(Math.max(...vertical) - top + 1));
+      const base = definition.layers[0].bindings || {};
+      for (const layer of definition.layers) root.appendChild(renderToraboLayer(layer, definition, { left, top, base }));
+    }
+
+    function renderToraboLayer(layer, definition, layout) {
+      const board = createBoard(layer.name, layer.summary || definition.summary || "");
+      const keyboard = document.createElement("div");
+      keyboard.className = "torabo-geometry";
+      const bindings = layer.bindings || {};
+      for (const key of definition.keys) {
+        const keyEl = document.createElement("div");
+        keyEl.className = "key";
+        const label = bindings[key.id] ?? key.label ?? "";
+        keyEl.textContent = label;
+        keyEl.title = label;
+        if (label.length > 4) keyEl.dataset.longLabel = "";
+        if (label && label !== (layout.base[key.id] ?? key.label ?? "")) keyEl.classList.add("mapped");
+        keyEl.style.setProperty("--key-x", String(key.x - layout.left));
+        keyEl.style.setProperty("--key-y", String(key.y - layout.top));
+        keyboard.appendChild(keyEl);
+      }
+      board.appendChild(keyboard);
+      return board;
+    }
+
+    // どちらの配列も同じタイトルと補足の表示枠を組み立てる。
+    function createBoard(titleText, summaryText, active = false) {
+      const board = document.createElement("section");
+      board.className = active ? "board active" : "board";
+      const head = document.createElement("div");
+      head.className = "board-head";
+      const title = document.createElement("div");
+      title.className = "board-title";
+      title.textContent = titleText;
+      const summary = document.createElement("div");
+      summary.className = "board-summary";
+      summary.textContent = summaryText;
+      head.appendChild(title);
+      head.appendChild(summary);
+      board.appendChild(head);
+      return board;
+    }
+
+    window.showKeymap = showKeymap;
+    try { showKeymap("jis"); }
     catch (error) {
-      document.body.innerHTML = `<pre style="color:#ea6962;padding:24px;">failed to load keymap: ${error}</pre>`;
+      const message = document.createElement("pre");
+      message.style.cssText = "color:#ea6962;padding:24px";
+      message.textContent = `キー一覧を読み込めませんでした。${error.message}`;
+      document.body.replaceChildren(message);
     }
   </script>
 </body>

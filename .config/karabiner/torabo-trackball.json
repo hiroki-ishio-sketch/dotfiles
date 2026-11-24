@@ -1,0 +1,22 @@
+{
+  "model": "Torabo-tsuki (S)",
+  "cpi": 600,
+  "automatic_mouse_layer": {
+    "enabled": true,
+    "layer": 1,
+    "timeout_ms": 664,
+    "debounce_ms": 25,
+    "threshold": 10,
+    "delay_ms": 200
+  },
+  "scroll": {
+    "layer_mask": 0,
+    "options": 0,
+    "divide": 15
+  },
+  "encoder": {
+    "layer_mask": 0,
+    "snap_layer_mask": 128,
+    "divide": 1
+  }
+}

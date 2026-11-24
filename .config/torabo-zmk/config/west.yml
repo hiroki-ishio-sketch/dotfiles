@@ -1,0 +1,45 @@
+# 左右で確認した構成を別環境でも再現できるよう、依存のブランチと移動可能なタグをコミットに固定する。
+manifest:
+  remotes:
+    - name: maker
+      url-base: https://github.com/sekigon-gonnoc
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+  projects:
+    - name: zmk-keyboard-torabo-tsuki
+      remote: maker
+      revision: b931eb2d1d821935e2787c085581c560be12f19d
+      import: config/west.yml
+    - name: zmk
+      remote: zmkfirmware
+      revision: 241ff39556b3685c9344c4c22fd9a655af8eb3ba
+      import: app/west.yml
+    - name: zephyr
+      remote: zmkfirmware
+      revision: dacab4875df72109b96cc8977547a0dc04875bcd
+      clone-depth: 1
+      # ZMK v0.2と同じ依存の範囲を維持する。
+      import:
+        name-blocklist: [ci-tools, hal_altera, hal_cypress, hal_infineon, hal_microchip, hal_nxp,
+                         hal_openisa, hal_silabs, hal_xtensa, hal_st, hal_ti, loramac-node,
+                         mcuboot, mcumgr, net-tools, openthread, edtt, trusted-firmware-m]
+    - name: zmk-component-ble-micro-pro
+      remote: maker
+      revision: 9e7204cb639267573ac72e0560fe168e8b5cb334
+    - name: zmk-driver-kscan-74hc164-matrix
+      remote: maker
+      revision: 16179879cb31d8e8fb9a71acfbc40c09aeb4d1a8
+    - name: zmk-feature-status-led
+      remote: maker
+      revision: 6ad3fc6d5e673ced58478a1ea6bcf5cfb68cc959
+    - name: zmk-feature-cdc-acm-bootloader-trigger
+      remote: maker
+      revision: 3fc210f840433bb9204a510f3a2c78b4fa11482f
+    - name: zmk-feature-non-lipo-battery-management
+      remote: maker
+      revision: 43fa56fb7d1e065393e926b6caa0ea02cb86eca7
+    - name: zmk-pmw3610-driver
+      remote: maker
+      revision: b168adcb0b472d959c69e7b02dc0cf2a064f7d24
+  self:
+    path: config

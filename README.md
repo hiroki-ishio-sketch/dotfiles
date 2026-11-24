@@ -117,6 +117,10 @@ ln -s ~/dotfiles/.config/mcphub ~/.config/mcphub
 
 導入前確認は `bash .bin/install-karabiner.sh --dry-run`、導入は `bash .bin/install-karabiner.sh` です。初回はシステム設定で Input Monitoring とアクセシビリティの許可が必要です。許可後に Karabiner-Elements を起動すると設定が有効になります。
 
+#### Torabo-tsuki (S) のキーマップ編集
+
+キー割り当てとトラックボール、スリープ設定をリポジトリで管理します。GitHubで設定を編集して保存すると、右親機・左子機のファームウェアが自動でビルドされます。MacのKarabinerで表示するキー一覧にはToraboの配列も含まれます。[編集・ビルド・書き込み手順](.config/torabo-zmk/README.md)
+
 ## セットアップ
 
 ### APIキーの設定

@@ -1,0 +1,15 @@
+/* BMP/Vialの保存領域にZMKの設定を書き込まないよう、アプリ領域の後半をZMK専用に使う。 */
+&code_partition {
+    reg = <0x26000 0xaa000>;
+};
+
+/delete-node/ &storage_partition;
+
+&flash0 {
+    partitions {
+        storage_partition: partition@d0000 {
+            label = "storage";
+            reg = <0xd0000 0x6000>;
+        };
+    };
+};
