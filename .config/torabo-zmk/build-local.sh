@@ -123,7 +123,7 @@ run_build() {
         west manifest --freeze --active-only > resolved-west.yml
     '
 
-    # ネットワークから切り離して、右のトラックボール側と左の子機をコンパイルする。
+    # ネットワークから切り離して、右・左・Bluetooth設定リセット用をコンパイルする。
     "$docker_cli" run "${sandbox[@]}" --network none "$IMAGE" bash -ec '
         export ZEPHYR_BASE=/workspace/zephyr CMAKE_BUILD_PARALLEL_LEVEL=4
         west zephyr-export
@@ -136,10 +136,32 @@ run_build() {
                 -S studio-rpc-usb-uart -- -DZMK_CONFIG=/workspace/config \
                 "-DSHIELD=torabo_tsuki_$half" "${role[@]}"
         done
+        west build -p always -s zmk/app -d build-settings-reset -b ble_micro_pro -- \
+            -DZMK_CONFIG=/workspace/config -DSHIELD=settings_reset
+        # 復旧用が通常版と同じZMK領域だけを消去し、BMP/Vial領域に届かないことを生成結果から確認する。
+        python3 - <<"PY"
+from pathlib import Path
+import re
+
+def storage_region(build):
+    dts = Path(build, "zephyr", "zephyr.dts").read_text()
+    region = re.search(r"storage_partition:\s*partition@[0-9a-f]+\s*\{[^}]*?\breg\s*=\s*<\s*(0x[0-9a-f]+)\s+(0x[0-9a-f]+)\s*>", dts)
+    if region is None:
+        raise SystemExit(f"保存領域が見つかりません。{build}")
+    return tuple(int(value, 16) for value in region.groups())
+
+expected = storage_region("build-right")
+start, size = expected
+if (start != 0xd0000 or size != 0x6000
+        or any(storage_region(build) != expected for build in ("build-left", "build-settings-reset"))):
+    raise SystemExit("通常版と復旧用の保存領域が一致しないか、ZMK専用領域の範囲外です。")
+print("右・左・復旧用の保存領域がZMK専用領域と一致しました。")
+PY
         cp build-right/zephyr/zmk.uf2 firmware/torabo-tsuki-s-right-central.uf2
         cp build-left/zephyr/zmk.uf2 firmware/torabo-tsuki-s-left-peripheral.uf2
+        cp build-settings-reset/zephyr/zmk.uf2 firmware/settings-reset-ble-micro-pro.uf2
     '
-    printf '左右のファームウェア %s/firmware\n' "$workspace"
+    printf '左右と settings reset のファームウェア %s/firmware\n' "$workspace"
 }
 
 main "$@"

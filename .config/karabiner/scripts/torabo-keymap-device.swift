@@ -4,7 +4,12 @@ import IOKit.hid
 struct Failure: Error { let message: String }
 struct PhysicalKey: Decodable { let id: String }
 struct Layer: Codable { let name: String; let matrix: [[String]] }
-struct Settings: Decodable { let keys: [PhysicalKey]; let layers: [Layer] }
+struct Settings: Decodable {
+    struct Source: Decodable { let firmware: String? }
+    let source: Source?
+    let keys: [PhysicalKey]
+    let layers: [Layer]
+}
 enum Operation { case read; case apply(Int, Int, Int, UInt16, UInt16) }
 final class Response { var bytes: [UInt8]? }
 final class Device {
@@ -107,7 +112,7 @@ func applyKey(expected: UInt16, value: UInt16, get: () throws -> UInt16, set: (U
 func parseArguments(_ arguments: [String]) throws -> Operation {
     if arguments == ["read"] { return .read }
     guard arguments.count == 6, arguments[0] == "apply-key" else {
-        throw Failure(message: "使い方: read または apply-key 設定JSON レイヤー 行 列 変更前の0xNNNN")
+        throw Failure(message: "使い方: read または apply-key Vial設定JSON レイヤー 行 列 変更前の0xNNNN")
     }
     guard let layer = Int(arguments[2]), (0..<8).contains(layer),
           let row = Int(arguments[3]), (0..<10).contains(row),
@@ -126,11 +131,17 @@ func parseArguments(_ arguments: [String]) throws -> Operation {
 }
 
 func validate(_ settings: Settings) throws {
+    // ZMKの表示用コードはVialの実機へ送信できない。レイヤー数に関わらず接続前に拒否する。
+    guard settings.source?.firmware?.lowercased() != "zmk" else {
+        throw Failure(message: "ZMKの表示用JSONは書き込みに使えません。torabo-vial-keymap.jsonを指定してください。")
+    }
     let ids = settings.keys.map(\.id)
     guard Set(ids) == physicalKeys, ids.count == physicalKeys.count else {
         throw Failure(message: "物理キー一覧がS配列の42キーと一致しません。")
     }
-    guard settings.layers.count == 8 else { throw Failure(message: "設定には8レイヤーが必要です。") }
+    guard settings.layers.count == 8 else {
+        throw Failure(message: "Vial設定には8レイヤーが必要です。")
+    }
     for layer in settings.layers {
         guard layer.matrix.count == 10 else { throw Failure(message: "各レイヤーには10行が必要です。") }
         for row in layer.matrix {

@@ -49,8 +49,14 @@ fi
 
 python3 -m json.tool "$LAYERS_FILE" >/dev/null
 
-if ! grep -Fq '"id": "base"' "$LAYERS_FILE" || ! grep -Fq '"id": "f"' "$LAYERS_FILE"; then
-  echo "レイヤー定義に base / f が含まれていません。" >&2
+for layer_id in base f d v c x; do
+  if ! grep -Fq "\"id\": \"$layer_id\"" "$LAYERS_FILE"; then
+    echo "レイヤー定義に $layer_id が含まれていません。" >&2
+    exit 1
+  fi
+done
+if ! grep -Fq '"z": "z/⌃"' "$LAYERS_FILE"; then
+  echo "ベースレイヤーに z hold=Control の表示がありません。" >&2
   exit 1
 fi
 
@@ -113,7 +119,19 @@ for expected in \
   '"key_code": "0"' \
   'd layer' \
   '"name": "v_held"' \
-  'v layer'; do
+  'v layer' \
+  '"name": "c_held"' \
+  'c layer' \
+  '"name": "x_held"' \
+  'x layer' \
+  '"key_code": "z"' \
+  'left_control' \
+  'z hold=Control' \
+  '"key_code": "escape"' \
+  '"key_code": "delete_forward"' \
+  'launchpad' \
+  'mission_control' \
+  'volume_increment'; do
   if ! grep -Fq "$expected" "$CONFIG_FILE"; then
     echo "Karabiner 設定に期待した定義が含まれていません: $expected" >&2
     exit 1

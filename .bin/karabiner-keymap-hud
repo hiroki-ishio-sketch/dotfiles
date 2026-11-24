@@ -13,12 +13,17 @@ readonly PID_FILE="$STATE_DIR/daemon.pid"
 readonly CMD_FILE="$STATE_DIR/command"
 readonly LOG_FILE="$STATE_DIR/hud.log"
 readonly HIDUTIL="${KARABINER_HUD_HIDUTIL:-/usr/bin/hidutil}"
+readonly BATTERY_SWIFT="${KARABINER_TORABO_BATTERY_SWIFT:-$DOTFILES_DIR/.config/karabiner/scripts/torabo-battery.swift}"
+readonly BATTERY_BIN="$STATE_DIR/torabo-battery"
+readonly BATTERY_JSON="$STATE_DIR/torabo-battery.json"
+readonly BATTERY_LOCK="$STATE_DIR/torabo-battery.lock"
 
 usage() {
   cat <<'USAGE'
 Usage: karabiner-keymap-hud show|hide|status|start|stop
 
 f + b で使用するキー一覧を表示または非表示にします。
+Torabo 接続時は直近の電池残量も見出しに出します。
 USAGE
 }
 
@@ -66,19 +71,55 @@ start_daemon() {
   }
 }
 
-show_hud() {
-  start_daemon
-  local display=show
-  if torabo_connected; then display='show torabo'; fi
-  printf '%s\n' "$display" >"$CMD_FILE"
+# ビルドと取得を別プロセスで行い、取得結果を一度に置き換える。
+refresh_battery_async() {
+  (
+    mkdir "$BATTERY_LOCK" 2>/dev/null || exit 0
+    local binary_tmp="" output_tmp=""
+    trap 'rm -f -- "$binary_tmp" "$output_tmp"; rmdir "$BATTERY_LOCK"' EXIT
+    trap 'exit 1' HUP INT TERM
+    [[ -f "$BATTERY_SWIFT" ]] || exit 0
+    if [[ ! -x "$BATTERY_BIN" || "$BATTERY_SWIFT" -nt "$BATTERY_BIN" ]]; then
+      binary_tmp="$(mktemp "$STATE_DIR/torabo-battery-bin.XXXXXX")" || exit 1
+      /usr/bin/swiftc -module-cache-path "$STATE_DIR/swift-cache" -O "$BATTERY_SWIFT" -o "$binary_tmp" || exit 1
+      mv -f "$binary_tmp" "$BATTERY_BIN" || exit 1
+    fi
+    output_tmp="$(mktemp "$STATE_DIR/torabo-battery-data.XXXXXX")" || exit 1
+    if "$BATTERY_BIN" >"$output_tmp"; then
+      mv -f "$output_tmp" "$BATTERY_JSON"
+    else
+      rm -f "$BATTERY_JSON"
+    fi
+  ) </dev/null >>"$LOG_FILE" 2>&1 &
+  disown || true
 }
 
-torabo_connected() {
+show_hud() {
+  start_daemon
+  local connection
+  connection="$(torabo_connection)" || connection=""
+  if [[ -z "$connection" ]]; then
+    printf 'show\n' >"$CMD_FILE"
+    return
+  fi
+  printf 'show torabo\n' >"$CMD_FILE"
+  if [[ "$connection" == zmk-ble ]]; then
+    refresh_battery_async
+  fi
+}
+
+torabo_connection() {
   local devices
   # USB と Bluetooth で共通の機器番号を使い、トラックボールだけの項目は数えない。
   devices="$("$HIDUTIL" list --matching '{"VendorID":65261,"ProductID":48301,"PrimaryUsagePage":1,"PrimaryUsage":6}' 2>/dev/null)" ||
     return 1
-  /usr/bin/awk 'tolower($1) == "0xfeed" && tolower($2) == "0xbcad" && $4 == "1" && $5 == "6" { found = 1 } END { exit !found }' <<<"$devices"
+  /usr/bin/awk '
+    tolower($1) == "0xfeed" && tolower($2) == "0xbcad" && $4 == "1" && $5 == "6" {
+      found = 1
+      if ($7 == "Bluetooth" && tolower($0) ~ / torabo-tsuki s([[:space:]]|$)/) zmk_ble = 1
+    }
+    END { if (found) print (zmk_ble ? "zmk-ble" : "torabo") }
+  ' <<<"$devices"
 }
 
 hide_hud() {

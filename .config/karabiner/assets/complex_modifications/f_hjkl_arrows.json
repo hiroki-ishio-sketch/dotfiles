@@ -2,45 +2,659 @@
   "title": "f layer + d number pad + v punctuation + 英数/かな/space tap-hold",
   "rules": [
     {
-        "description": "Torabo-tsuki (S) の f 長押し中に b を押してキー一覧を表示する",
-        "manipulators": [
-            {
-                "type": "basic",
-                "from": {
-                    "key_code": "f24",
-                    "modifiers": {
-                        "optional": [
-                            "any"
-                        ]
-                    }
-                },
-                "conditions": [
-                    {
-                        "type": "device_if",
-                        "identifiers": [
-                            {
-                                "vendor_id": 65261,
-                                "product_id": 48301,
-                                "is_keyboard": true
-                            }
-                        ]
-                    }
-                ],
-                "to": [
-                    {
-                        "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
-                    }
-                ],
-                "to_after_key_up": [
-                    {
-                        "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
-                    }
-                ]
+      "description": "Torabo-tsuki (S) の f 長押し中に b を押してキー一覧を表示する",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f24",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
             }
-        ]
+          },
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
+            }
+          ]
+        }
+      ]
     },
     {
-      "description": "f layer; f+n=ABC f+m=あいう; f+b=HUD; 英数 tap=Enter hold=⌘; f↔英数 either order +a = app switcher; space hold=Shift",
+      "description": "Torabo の F1–F12 を macOS の設定に合わせて標準ファンクションキーとして送る",
+      "manipulators": [
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f1",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f1",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f1",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f2",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f2",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f2",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f3",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f3",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f3",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f4",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f4",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f4",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f5",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f5",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f5",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f6",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f6",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f6",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f7",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f7",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f7",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f8",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f8",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f8",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f9",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f9",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f9",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f10",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f10",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f10",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f11",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f11",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f11",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "f12",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f12",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f12",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Torabo 以外で右 Shift の左隣のキーをハイフンにする",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "international1",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "hyphen"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "f layer (=Torabo L2); hjkl arrows; q Esc; e/u ⌫; p ⌦; a/s Tab; d ⌘; f+n=ABC f+m=あいう; f+b=HUD; 英数 tap=Enter hold=⌘; space hold=Shift",
       "manipulators": [
         {
           "type": "basic",
@@ -81,11 +695,33 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "eisuu_cmd",
@@ -132,6 +768,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -154,6 +800,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_cmd_layer",
@@ -178,6 +834,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -201,6 +867,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -223,6 +899,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -255,6 +941,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -286,6 +982,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_cmd_layer",
@@ -340,7 +1046,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -373,7 +1091,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -406,7 +1136,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -439,7 +1181,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -475,6 +1229,16 @@
           },
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "eisuu_cmd",
               "value": true
@@ -507,7 +1271,19 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -544,7 +1320,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -581,7 +1369,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -618,7 +1418,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -655,7 +1467,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -692,11 +1516,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -721,6 +1567,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_held",
               "value": true
@@ -743,6 +1599,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -767,6 +1633,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_held",
               "value": true
@@ -789,6 +1665,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -844,11 +1730,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -871,7 +1779,427 @@
         },
         {
           "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "q"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "f_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "escape"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "f_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "u"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "f_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "f_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "s"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "f_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "tab"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "f_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "tab"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "d"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "f_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "left_command"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "f_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "f"
+              },
+              {
+                "key_code": "p"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "f_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "delete_forward"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "f_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_cmd_layer",
@@ -929,7 +2257,19 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -966,7 +2306,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -1003,11 +2355,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -1032,6 +2406,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_held",
               "value": true
@@ -1054,6 +2438,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -1090,6 +2484,18 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
           "from": {
             "key_code": "japanese_eisuu",
             "modifiers": {
@@ -1121,6 +2527,18 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
           "from": {
             "key_code": "japanese_kana",
             "modifiers": {
@@ -1183,11 +2601,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 350
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -1245,7 +2685,24 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
@@ -1283,11 +2740,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1344,11 +2828,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1405,11 +2916,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1466,11 +3004,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1527,11 +3092,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1588,11 +3180,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1649,11 +3268,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1710,11 +3356,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1771,11 +3444,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1832,11 +3532,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1889,7 +3616,24 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
@@ -1927,11 +3671,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -1988,11 +3759,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2049,11 +3847,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2110,11 +3935,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2171,11 +4023,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2232,11 +4111,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2293,11 +4199,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2354,11 +4287,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2415,11 +4375,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2476,11 +4463,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2540,11 +4554,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2604,11 +4645,38 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2626,6 +4694,2749 @@
           "to": [
             {
               "key_code": "international3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "c layer (=Torabo L5): macOS の設定に合わせて F1–F12 を標準ファンクションキーとして送る",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "c"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "y"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f12",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f12",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f12",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f12",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "u"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f7",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f7",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f7",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f7",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "i"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f8",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f8",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f8",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f8",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "o"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f9",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f9",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f9",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f9",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "h"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f11",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f11",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f11",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f11",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "j"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f4",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f4",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f4",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f4",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "k"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f5",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f5",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f5",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f5",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "l"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f6",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f6",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f6",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f6",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "p"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f10",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f10",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f10",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f10",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "n"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f1",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f1",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f1",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f1",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "m"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f2",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f2",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f2",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f2",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "c"
+              },
+              {
+                "key_code": "comma"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "c_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "f3",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f3",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "c_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f3",
+              "conditions": [
+                {
+                  "type": "variable_if",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "key_code": "f3",
+              "modifiers": [
+                "fn"
+              ],
+              "conditions": [
+                {
+                  "type": "variable_unless",
+                  "name": "system.use_fkeys_as_standard_function_keys",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "x layer (=Torabo L9): 音量・再生・輝度・Launchpad / Mission Control",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "x",
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "x"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "y"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "consumer_key_code": "volume_increment"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "consumer_key_code": "volume_increment"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "u"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "consumer_key_code": "rewind"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "consumer_key_code": "rewind"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "i"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "consumer_key_code": "play_or_pause"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "consumer_key_code": "play_or_pause"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "o"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "consumer_key_code": "fast_forward"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "consumer_key_code": "fast_forward"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "h"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "consumer_key_code": "volume_decrement"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "consumer_key_code": "volume_decrement"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "j"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "launchpad"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "launchpad"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "k"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "display_brightness_decrement"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "display_brightness_decrement"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "l"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "display_brightness_increment"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "display_brightness_increment"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "p"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "consumer_key_code": "mute"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "consumer_key_code": "mute"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "n"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "display_brightness_decrement"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "display_brightness_decrement"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "m"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "display_brightness_increment"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "display_brightness_increment"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "x"
+              },
+              {
+                "key_code": "comma"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict",
+              "key_up_when": "all"
+            },
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "x_held",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "mission_control"
+            }
+          ],
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 250
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_unless",
+              "name": "f_held",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
+              "type": "variable_if",
+              "name": "x_held",
+              "value": true
+            }
+          ],
+          "from": {
+            "key_code": "comma",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "mission_control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "z hold=Control（Toraboと同じ）。単押しは z",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "z",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "z_ctrl",
+                "value": true,
+                "key_up_value": false
+              }
+            },
+            {
+              "key_code": "left_control",
+              "lazy": true
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "z"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_alone_timeout_milliseconds": 200
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
             }
           ]
         }

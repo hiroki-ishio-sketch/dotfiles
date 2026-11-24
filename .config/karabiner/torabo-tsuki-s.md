@@ -1,6 +1,12 @@
 # Torabo-tsuki (S) のキーマップ
 
-[torabo-tsuki-s.json](torabo-tsuki-s.json) は、このキーボードからUSBで取得した8レイヤーのキー割り当てです。接続中のキー一覧もこのファイルを読み込みます。変更を依頼するときは「Toraboの数字レイヤーで、右手小指側のキーを0に」など、レイヤーと物理キーと希望する動作を伝えてください。
+ZMK版のキー割り当ては [torabo_tsuki.keymap](../torabo-zmk/config/torabo_tsuki.keymap) で管理します。MacでToraboのキー一覧を開くたびに、表示用の [torabo-tsuki-s.json](torabo-tsuki-s.json) を読み込みます。キーを変更するときは [ZMKの手順](../torabo-zmk/README.md) に沿って、ファームウェアのキーマップとMacの表示用データの両方を更新します。変更を依頼するときは「Toraboの数字レイヤーで、右手小指側のキーを0に」など、レイヤーと物理キーと希望する動作を伝えてください。
+
+Toraboでは `f` を長押ししてから `b` を押すと、移動レイヤーのB位置が表示用の `F24` を送り、Karabinerがキー一覧を開きます。同じ `f` 保持中の `n` が英数（ABC）、`m` がかな（あいう）です。ZMKでは `LANG2` と `LANG1` を使います。内蔵キーボードの `f + b`、`f + n`、`f + m` でも同じ操作ができます。
+
+## BMP/Vial版の設定を編集する
+
+[torabo-vial-keymap.json](torabo-vial-keymap.json) は、ZMKへの移行前にBMP/Vial版からUSBで取得した8レイヤーのキー割り当てです。この節の書き込み手順はBMP/Vial版のみに適用します。ZMKの表示用JSONは編集ツールが接続前に拒否します。
 
 `keys` にある `id` は、0から始まる「行,列」です。対象レイヤーの `matrix[行][列]` にQMKのキーコードを16進で記載します。 `0x0000` は無効、`0x0001` は下のレイヤーの割り当てを使います。Vialが保持していたレイアウト選択値は `source.layout_options` に記録しています。キー一覧の物理配置はSサイズです。
 
@@ -12,10 +18,8 @@ swiftc -module-cache-path /private/tmp/torabo-swift-cache \
   -o /private/tmp/torabo-keymap-device
 /private/tmp/torabo-keymap-device read
 # F を保持したときの B の位置を、ファイルに設定した値で更新する場合。
-/private/tmp/torabo-keymap-device apply-key ~/.config/karabiner/torabo-tsuki-s.json 2 2 5 0x0001
+/private/tmp/torabo-keymap-device apply-key ~/.config/karabiner/torabo-vial-keymap.json 2 2 5 0x0001
 ```
-
-Toraboでは `f` を長押ししてから `b` を押すと、移動レイヤーのB位置が表示用の `F24` を送り、Karabinerがキー一覧を開きます。通常の `f` と `b` の短押しは元の設定を使います。内蔵キーボードの `f + b` でも接続に応じて表示を選びます。編集用JSONはキー一覧を開くたびに読み直されます。
 
 物理配置は[製作者のVial定義](https://github.com/sekigon-gonnoc/vial-qmk/blob/dev/ble-micro-pro/keyboards/sekigon/torabo_tsuki/keymaps/vial/vial.json)を基にしました。読み取り・編集には[Vialの公式プロトコル](https://github.com/vial-kb/vial-gui/blob/main/src/main/python/protocol/keyboard_comm.py)を使います。
 
@@ -45,8 +49,8 @@ BlueNap 0.1.2と同じ方法でToraboだけに切断を要求しました。要�
 
 ### ZMKのディープスリープを検討した結果
 
-実機から読み取ったファームウェアはBMP/Vialの `bmp-vial-1.3.3-0-g45aa1bf436` です。ZMKの `CONFIG_ZMK_SLEEP` と `CONFIG_ZMK_IDLE_SLEEP_TIMEOUT` を使うには、製作者のZMK版へ左右両方を移行し、8レイヤーのキー割り当てやオートマウスレイヤーをZMK用に移す必要があります。製作者のZMK版は実験用です。[製作者のZMK版](https://github.com/sekigon-gonnoc/zmk-keyboard-torabo-tsuki)
+移行前に実機から読み取ったファームウェアはBMP/Vialの `bmp-vial-1.3.3-0-g45aa1bf436` です。ZMKの `CONFIG_ZMK_SLEEP` と `CONFIG_ZMK_IDLE_SLEEP_TIMEOUT` を使うため、左右両方のファームウェアを切り替え、オートマウスレイヤーやキー割り当てを移植しました。[製作者のZMK版](https://github.com/sekigon-gonnoc/zmk-keyboard-torabo-tsuki)
 
 ZMKのタイマーはキーボードの無操作時間で、Macのスリープ開始とは連動しません。無操作から5分または15分でディープスリープする設定では、Macを寝かせた時点でToraboがまだ接続されている場合、今回のような約3秒後の画面点灯を防げるとは限りません。[ZMKの電源設定](https://zmk.dev/docs/config/power)・[macOSでの報告](https://github.com/zmkfirmware/zmk/issues/1273)
 
-右側にトラックボールがある実機向けに、8レイヤーと15分のディープスリープを移植しました。編集とビルドは [ZMK設定](../torabo-zmk/README.md) を参照してください。ファームウェアを切り替える前のVial設定は左右別に退避しています。
+右側にトラックボールがある実機向けの設定で、ZMKのディープスリープは無操作15分です。編集とビルドは [ZMK設定](../torabo-zmk/README.md) を参照してください。ファームウェアを切り替える前のVial設定は左右別に退避しています。

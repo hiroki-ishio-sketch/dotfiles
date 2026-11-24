@@ -25,6 +25,14 @@ cpi = int(config['CONFIG_PMW3610_CPI'])
 assert 200 <= cpi <= 3200 and cpi % 200 == 0
 assert int(config['CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS']) > 0
 
+# 右親機だけが左の電池残量を取得し、Studioの保存機能は上流設定に従う。
+battery_options = ('CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_PROXY',
+                   'CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING')
+assert all(option not in config for option in battery_options)
+assert 'CONFIG_ZMK_KEYMAP_SETTINGS_STORAGE' not in config
+right = (settings / 'torabo_tsuki_right.conf').read_text().splitlines()
+assert all(f'{option}=y' in right for option in battery_options)
+
 # 新旧ファームウェアで同じToraboとしてキー一覧を開けるよう、既存の機器条件と照合する。
 rules = json.loads((qmk / 'assets/complex_modifications/f_hjkl_arrows.json').read_text())
 ids = next(item for rule in rules['rules'] for mapping in rule['manipulators']
