@@ -54,7 +54,7 @@ reject(['apply-key', str(config), '2', '3', '0', '0x0001'], '物理キー')
 
 # 他のセルに不正な値があっても、設定全体を検証してから一件の反映を開始する。
 for mutation, expected in [
-    (lambda value: value['layers'].pop(), '8'),
+    (lambda value: value.__setitem__('layers', value['layers'][:7]), '8'),
     (lambda value: value['layers'][0]['matrix'].pop(), '10'),
     (lambda value: value['layers'][0]['matrix'][0].pop(), '7'),
     (lambda value: value['layers'][0]['matrix'][0].__setitem__(0, '0x10000'), 'キーコード'),

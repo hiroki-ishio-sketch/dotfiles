@@ -25,7 +25,7 @@ bash .config/torabo-zmk/build-local.sh
 
 作業フォルダは実行時に表示されます。左右の `.uf2` はその中の `firmware/` に生成され、使ったソースの版は `resolved-west.yml` に残ります。以前の作業フォルダを引数にすると、取り込んだソースを再利用できます。
 
-ZMK Studioで入力を保存したことがある場合は、再書き込み後も保存済みの割り当てが使われます。リポジトリの割り当てに戻すにはStudioで「Restore Stock Settings」を選びます。[ZMK Studioの公式手順](https://zmk.dev/docs/features/studio)
+この設定では `CONFIG_ZMK_KEYMAP_SETTINGS_STORAGE=n` のため、UF2に入っているキーマップが常に使われます。Studioで試した割り当ては再起動や再書き込みで残りません。[ZMK Studioの公式手順](https://zmk.dev/docs/features/studio)
 
 ## ファームウェアの切り替え
 

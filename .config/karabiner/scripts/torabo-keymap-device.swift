@@ -130,7 +130,9 @@ func validate(_ settings: Settings) throws {
     guard Set(ids) == physicalKeys, ids.count == physicalKeys.count else {
         throw Failure(message: "物理キー一覧がS配列の42キーと一致しません。")
     }
-    guard settings.layers.count == 8 else { throw Failure(message: "設定には8レイヤーが必要です。") }
+    guard (8...16).contains(settings.layers.count) else {
+        throw Failure(message: "設定には8〜16レイヤーが必要です。")
+    }
     for layer in settings.layers {
         guard layer.matrix.count == 10 else { throw Failure(message: "各レイヤーには10行が必要です。") }
         for row in layer.matrix {

@@ -19,8 +19,8 @@
                        <&macro_release &kp LCTRL>;
         )
 
-        // K長押しでスクロール層へ入る。ボール操作を待たず短めの判定にする。
-        scroll_k: hold_tap {
+        // X長押しでメディア層。判定を短くする（ノード名 hold_tap の重複を避ける）。
+        media_x: media_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <120>;
@@ -37,18 +37,19 @@
         layer_0 {
             display-name = "基本";
             bindings = <
-                &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y  &kp U  &lt 1 I  &kp O  &none
-                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &scroll_k 8 K  &kp L  &kp P
-                &mt LCTRL Z  &kp X  &lt 5 C  &lt 4 V  &lt 6 B    &none  &kp N  &kp M  &none  &to 1
-                &kp CAPSLOCK  &kp LGUI  &kp LALT  &kp LALT  &mt LGUI RET  &mt LSHFT SPACE    &mt RSHFT SPACE  &mt RGUI KP_ENTER  &none  &none  &none  &to 0
+                &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y  &kp U  &kp I  &kp O  &mo 8
+                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &kp K  &kp L  &kp P
+                &mt LCTRL Z  &media_x 9 X  &lt 5 C  &lt 4 V  &lt 6 B    &none  &kp N  &kp M  &none  &to 1
+                &kp CAPSLOCK  &kp LGUI  &kp LALT  &kp LALT  &mt LGUI RET  &mt LSHFT SPACE    &mt RSHFT SPACE  &mt RGUI RET  &none  &none  &none  &to 0
             >;
         };
 
+        // ボールで入るマウス層。H戻る J左クリック K右クリック L進む。N長押し相当は mo でスクロール。
         layer_1 {
             display-name = "マウス";
             bindings = <
-                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &mkp MB5  &trans
-                &trans  &trans  &trans  &trans  &trans    &mkp MB4  &mkp LCLK  &mo 8  &mkp RCLK  &mkp RCLK
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &mkp MB4  &mkp LCLK  &mkp RCLK  &mkp MB5  &trans
                 &trans  &trans  &trans  &trans  &trans    &trans  &mo 8  &mkp LCLK  &trans  &to 0
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &to 0
             >;
@@ -89,11 +90,13 @@
             >;
         };
 
+        // C長押し。標準の F1–F12（Karabinerでメディア化を防ぐ）。数字層と同じ位置。
+        // Y=F12 U=F7 I=F8 O=F9 / H=F11 J=F4 K=F5 L=F6 P=F10 / N=F1 M=F2 (M右)=F3
         layer_5 {
-            display-name = "機能";
+            display-name = "ファンクション";
             bindings = <
-                &trans  &trans  &trans  &trans  &trans    &trans  &kp F7  &kp F8  &kp F9  &kp F10
-                &trans  &trans  &trans  &trans  &trans    &kp F12  &kp F4  &kp F5  &kp F6  &kp F11
+                &trans  &trans  &trans  &trans  &trans    &kp F12  &kp F7  &kp F8  &kp F9  &trans
+                &trans  &trans  &trans  &trans  &trans    &kp F11  &kp F4  &kp F5  &kp F6  &kp F10
                 &trans  &trans  &trans  &trans  &trans    &trans  &kp F1  &kp F2  &kp F3  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
@@ -128,6 +131,18 @@
                 &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
                 &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
                 &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        // X長押し。MacのFキー帯に相当するメディア／輝度／Mission Control。
+        // Y音量+ U前 I再生 O次 / H音量- J Launchpad K輝度- L輝度+ Pミュート / N輝度- M輝度+ (M右)Mission Control
+        media {
+            display-name = "メディア";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans    &kp C_VOL_UP  &kp C_PREV  &kp C_PP  &kp C_NEXT  &trans
+                &trans  &trans  &trans  &trans  &trans    &kp C_VOL_DN  &kp C_AC_DESKTOP_SHOW_ALL_APPLICATIONS  &kp C_BRI_DEC  &kp C_BRI_INC  &kp C_MUTE
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp C_BRI_DEC  &kp C_BRI_INC  &kp C_AC_DESKTOP_SHOW_ALL_WINDOWS  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
