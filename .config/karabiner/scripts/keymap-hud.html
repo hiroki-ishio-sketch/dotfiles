@@ -286,6 +286,23 @@
       color: var(--grey1);
       font-size: 11px;
     }
+    /* JISの6層を3段で表示する場合も、キーと凡例を表示枠に収める。 */
+    .jis-keymap-compact {
+      --key-h: 25px;
+    }
+    .jis-keymap-compact .key { padding: 0 2px; line-height: 1; }
+    .jis-keymap-compact .key .base { font-size: 8px; }
+    .jis-keymap-compact .key .action { font-size: 9px; }
+    .jis-keymap-compact .key[data-long-label] { padding-inline: 0; }
+    .jis-keymap-compact .key[data-long-label] .action {
+      font-size: 7px;
+      font-family: Menlo, monospace;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+    .jis-keymap-compact .key .shift { top: 1px; }
+    .jis-keymap-compact .key .kana { bottom: 1px; }
     .swatch {
       display: inline-block;
       width: 10px;
@@ -431,25 +448,15 @@
       }
 
       if (mapped) {
-        if (mappedShift) {
-          const shiftEl = document.createElement("div");
-          shiftEl.className = "shift";
-          shiftEl.textContent = mappedShift;
-          keyEl.appendChild(shiftEl);
-          const action = document.createElement("div");
-          action.className = "action";
-          action.textContent = mapped;
-          keyEl.appendChild(action);
-        } else {
-          const base = document.createElement("div");
-          base.className = "base";
-          base.textContent = displayName(key, def);
-          const action = document.createElement("div");
-          action.className = "action";
-          action.textContent = mapped;
-          keyEl.appendChild(base);
-          keyEl.appendChild(action);
-        }
+        const label = document.createElement("div");
+        label.className = mappedShift ? "shift" : "base";
+        label.textContent = mappedShift || displayName(key, def);
+        keyEl.appendChild(label);
+        const action = document.createElement("div");
+        action.className = "action";
+        action.textContent = mapped;
+        if (mapped.length > 8) keyEl.dataset.longLabel = "";
+        keyEl.appendChild(action);
       } else if (key !== "space") {
         const name = displayName(key, def);
         if (!name && !glyph) {
@@ -509,11 +516,13 @@
       const root = document.getElementById("layers");
       const title = document.querySelector("#keymap-title");
       const sub = document.querySelector("#keymap-sub");
+      const def = window.__KEYMAP_LAYERS__;
       const split = profile === "torabo" ? window.__TORABO_KEYMAP__ : null;
       const useSplit = Boolean(split && Array.isArray(split.keys) && split.keys.length &&
         split.keys.every((key) => key && Number.isFinite(key.x) && Number.isFinite(key.y)) &&
         Array.isArray(split.layers) && split.layers.length && split.layers.every((layer) => layer && typeof layer.name === "string"));
       document.body.classList.toggle("torabo-keymap", useSplit);
+      document.body.classList.toggle("jis-keymap-compact", !useSplit && def?.layers?.length > 4);
       root.replaceChildren();
       if (useSplit) {
         title.textContent = split.name || "Torabo-tsuki (S)";
@@ -526,7 +535,6 @@
         renderToraboKeymap(root, split);
         return "torabo";
       }
-      const def = window.__KEYMAP_LAYERS__;
       if (!def) throw new Error("JISの配列データがありません。");
       title.textContent = "Keymap Layers · JIS shape / US legends";
       if (sub) sub.textContent = "f + b で表示 · 離すと閉じる · Gruvbox Material";

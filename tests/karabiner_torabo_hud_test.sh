@@ -50,7 +50,7 @@ function openKeymap(definition) {
     __TORABO_KEYMAP__: definition,
   };
   vm.runInNewContext(script, { window, document }, { timeout: 5000 });
-  return { window, layers, heading, sub };
+  return { window, layers, heading, sub, body: document.body };
 }
 
 const options = {
@@ -59,13 +59,15 @@ const options = {
   keys: [{ id: 'left', x: -1, y: 1 }, { id: 'right', x: 5.25, y: 0 }],
   layers: [{ name: '通常', bindings: { left: 'F', right: 'B' } }, { name: '数字', bindings: { left: '1', right: '0' } }],
 };
-const { window, layers, heading, sub } = openKeymap(options);
+const { window, layers, heading, sub, body } = openKeymap(options);
 assert.equal(layers.children.length, 6, '最初はJISの base/f/d/v/c/x レイヤーを表示する');
+assert.ok(body.classes.has('jis-keymap-compact'), 'JISの6層をウィンドウに収める寸法を使う');
 window.__TORABO_BATTERY_SUBTITLE__ = '右 80% · 左 70%';
 window.showKeymap('torabo');
 assert.equal(heading.textContent, 'Torabo-tsuki (S)');
 assert.match(sub.textContent, /右 80%/);
 assert.equal(layers.children.length, 2, '設定にあるレイヤーをすべて表示する');
+assert.ok(!body.classes.has('jis-keymap-compact'), 'ToraboはJIS専用の寸法を使わない');
 const [firstBoard, secondBoard] = layers.children;
 assert.equal(firstBoard.children[0].children[0].textContent, '通常');
 assert.equal(secondBoard.children[0].children[0].textContent, '数字');
@@ -80,6 +82,7 @@ assert.equal(secondBoard.children[1].children[0].textContent, '1');
 window.showKeymap('jis');
 assert.match(heading.textContent, /JIS/);
 assert.equal(layers.children.length, 6, '切断後はJISの base/f/d/v/c/x レイヤーへ戻る');
+assert.ok(body.classes.has('jis-keymap-compact'), 'JISに戻ると6層用の寸法に戻る');
 
 const manyLayers = openKeymap({ ...options, layers: Array.from({ length: 16 }, (_, index) => ({
   name: `レイヤー${index}`, bindings: { left: '<設定>', right: 'F12' },

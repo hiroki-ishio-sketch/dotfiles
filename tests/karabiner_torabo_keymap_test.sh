@@ -8,7 +8,7 @@ fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# 読み出したキーマップを実機に送らず、キー一覧用の表示名と座標に変換する。
+# ZMKキーマップの表示用データを実機に送らず、表示名と座標に変換する。
 node - "$ROOT_DIR/.config/karabiner" <<'JS'
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -37,12 +37,18 @@ assert.equal(output.layers[0].bindings['5,1'], 'L8\n長押し', 'Oの右・Pの�
 assert.equal(output.layers[0].bindings['4,6'], '空白\n⇧');
 assert.equal(output.layers[1].bindings['6,4'], 'クリック1');
 assert.equal(output.layers[1].bindings['6,3'], 'クリック2');
-assert.equal(output.layers[1].bindings['7,3'], 'L8\n長押し', 'マウス層のNはスクロール');
+assert.equal(output.layers[1].bindings['7,4'], 'L8\n長押し', 'マウス層のNはスクロール');
+assert.equal(output.layers[1].bindings['7,3'], 'クリック1', 'マウス層のMは左クリック');
 assert.equal(output.layers[3].bindings['5,1'], '×');
 assert.equal(output.layers[3].bindings['0,1'], '▽');
 assert.equal(output.layers[6].bindings['6,5'], '|');
+assert.equal(output.layers[6].bindings['1,3'], 'Bluetooth\n登録消去');
+assert.equal(output.layers[6].bindings['1,4'], 'Bluetooth\n接続先0');
+assert.equal(output.layers[6].bindings['6,1'], '書き込み\nモード');
 assert.equal(output.layers[8].name, 'L9 メディア');
 assert.equal(output.layers[8].bindings['5,5'], '音量+');
+assert.equal(output.layers[8].bindings['7,4'], '輝度−', 'メディア層のNは輝度を下げる');
+assert.equal(output.layers[8].bindings['7,3'], '輝度+', 'メディア層のMは輝度を上げる');
 
 const edited = copy();
 edited.layers[0].matrix[1][4] = '0xffff';
@@ -57,5 +63,5 @@ const invalid = copy();
 invalid.layers[0].matrix[1][4] = 'bad';
 assert.throws(() => render(invalid), /キーコード/);
 assert.throws(() => render({ ...source, model: '別のキーボード' }), /Torabo-tsuki/);
-console.log('成功: Torabo-tsuki (S)の実機レイヤー、物理位置、キーコードの表示を確認しました。');
+console.log('成功: Torabo-tsuki (S)のZMKレイヤー、物理位置、キーコードの表示を確認しました。');
 JS

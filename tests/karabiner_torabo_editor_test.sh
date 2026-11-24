@@ -23,7 +23,10 @@ source = root / '.config/karabiner/scripts/torabo-keymap-device.swift'
 binary = temporary / 'torabo-keymap-device'
 subprocess.run(['swiftc', '-module-cache-path', str(temporary / 'modules'), str(source), '-o', str(binary)],
                check=True, timeout=180)
-fixture = json.loads((root / '.config/karabiner/torabo-tsuki-s.json').read_text())
+fixture = json.loads((root / '.config/karabiner/torabo-vial-keymap.json').read_text())
+display = json.loads((root / '.config/karabiner/torabo-tsuki-s.json').read_text())
+assert len(fixture['layers']) == 8, '旧BMP/Vial向けの取得済み設定を8層のまま保存する'
+assert fixture['layers'][2]['matrix'][2][5] == '0x0073', '実機から取得したキー割り当てを保持する'
 config = temporary / 'settings.json'
 
 
@@ -52,9 +55,17 @@ for value in ['0x10000', '0xGGGG', '1', '0x1']:
     reject([*base[:-1], value], 'キーコード')
 reject(['apply-key', str(config), '2', '3', '0', '0x0001'], '物理キー')
 
+# 表示用のZMKデータはレイヤーを減らしてもVial設定として使えない。
+write_fixture(display)
+reject(base, 'ZMK')
+display['layers'] = display['layers'][:8]
+write_fixture(display)
+reject(base, 'ZMK')
+
 # 他のセルに不正な値があっても、設定全体を検証してから一件の反映を開始する。
 for mutation, expected in [
     (lambda value: value.__setitem__('layers', value['layers'][:7]), '8'),
+    (lambda value: value['layers'].append(copy.deepcopy(value['layers'][0])), '8'),
     (lambda value: value['layers'][0]['matrix'].pop(), '10'),
     (lambda value: value['layers'][0]['matrix'][0].pop(), '7'),
     (lambda value: value['layers'][0]['matrix'][0].__setitem__(0, '0x10000'), 'キーコード'),
@@ -72,6 +83,14 @@ reject(base, 'JSON')
 harness = temporary / 'main.swift'
 harness.write_text(source.read_text() + '\n' + r'''
 import Foundation
+let configuration = CommandLine.arguments[1]
+let operation = try parseArguments(["apply-key", configuration, "2", "2", "5", "0x0001"])
+if case let .apply(layer, row, column, expected, desired) = operation {
+    precondition(layer == 2 && row == 2 && column == 5 && expected == 1 && desired == 0x73)
+} else {
+    preconditionFailure("旧BMP/Vial設定から指定した1件を読み込めませんでした。")
+}
+
 func scenario(_ initial: UInt16, _ expected: UInt16, _ value: UInt16, _ stored: UInt16?, _ succeeds: Bool, _ writes: Int) {
     var current = initial, saves: [UInt16] = []
     do {
@@ -93,6 +112,6 @@ print("成功: 変更前の不一致は保存ゼロ、同値は保存ゼロ、�
 simulation = temporary / 'offline-scenarios'
 subprocess.run(['swiftc', '-D', 'TORABO_OFFLINE_TEST', '-module-cache-path', str(temporary / 'modules'),
                 str(harness), '-o', str(simulation)], check=True, timeout=180)
-subprocess.run([str(simulation)], check=True, timeout=5)
+subprocess.run([str(simulation), str(root / '.config/karabiner/torabo-vial-keymap.json')], check=True, timeout=5)
 print('成功: Toraboの無効な操作、範囲外、物理キー以外、不正な設定を実機接続前に拒否しました。')
 PY

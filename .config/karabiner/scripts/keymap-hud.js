@@ -58,7 +58,7 @@ function keymapDisplayScript(command, path, batteryPath) {
   const showJis = 'window.showKeymap("jis")';
   if (command !== "show torabo") return showJis;
   try {
-    // 表示のたびに編集用 JSON と、HUD キャッシュの電池残量を読み込む。
+    // 表示のたびにToraboの表示用JSONと、保存された電池残量を読み込む。
     const definition = JSON.stringify(JSON.parse(readText(path)));
     const subtitle = (batteryPath && batterySubtitle(batteryPath)) || "電池は次回の表示で更新されます";
     return `try {
@@ -93,7 +93,7 @@ function run(argv) {
   const app = $.NSApplication.sharedApplication;
   app.setActivationPolicy($.NSApplicationActivationPolicyAccessory);
 
-  // 2×2 レイヤーグリッドが収まるサイズ（JIS キーボード×最大4枚）
+  // JISでは最大6枚を2列3段に並べ、Toraboではレイヤー数に応じて寸法を調整する。
   const width = 1280;
   const height = 780;
   const panel = $.NSPanel.alloc.initWithContentRectStyleMaskBackingDefer(

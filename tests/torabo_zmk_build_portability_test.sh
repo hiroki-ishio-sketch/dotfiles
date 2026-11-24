@@ -41,8 +41,11 @@ if [[ "$*" == *'west update'* ]]; then
 else
     [[ "$*" == *'--network none'* ]]
     [[ "$*" == *'-DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y'* ]]
+    # 復旧用でもボードの上書き設定を読み、通常版と同じ保存領域だけを使う。
+    [[ "$*" == *'-DZMK_CONFIG=/workspace/config -DSHIELD=settings_reset'* ]] || exit 1
     printf '%s\n' '右' > "$workspace/firmware/torabo-tsuki-s-right-central.uf2"
     printf '%s\n' '左' > "$workspace/firmware/torabo-tsuki-s-left-peripheral.uf2"
+    printf '%s\n' '復旧' > "$workspace/firmware/settings-reset-ble-micro-pro.uf2"
 fi
 printf '%s\n' "$workspace" >> "$DOCKER_CALLS"
 MOCK
@@ -54,6 +57,7 @@ bash "$builder" "$DOCKER_WORKSPACE" > "$temp_dir/success.log"
 grep -Fq "$DOCKER_WORKSPACE/firmware" "$temp_dir/success.log"
 test -s "$DOCKER_WORKSPACE/firmware/torabo-tsuki-s-right-central.uf2"
 test -s "$DOCKER_WORKSPACE/firmware/torabo-tsuki-s-left-peripheral.uf2"
+test -s "$DOCKER_WORKSPACE/firmware/settings-reset-ble-micro-pro.uf2"
 test -s "$DOCKER_WORKSPACE/resolved-west.yml"
 
 # 一時作業先を安全に再利用でき、異なるアーキテクチャのDockerでも同じ成果物が得られる。

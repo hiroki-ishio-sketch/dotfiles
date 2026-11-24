@@ -42,7 +42,7 @@
                         ]
                     },
                     {
-                        "description": "Torabo: F1–F12 を標準ファンクションキーとして送る（メディアキー化を防ぐ）",
+                        "description": "Torabo の F1–F12 を macOS の設定に合わせて標準ファンクションキーとして送る",
                         "manipulators": [
                             {
                                 "type": "basic",
@@ -69,8 +69,25 @@
                                 "to": [
                                     {
                                         "key_code": "f1",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f1",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -100,8 +117,25 @@
                                 "to": [
                                     {
                                         "key_code": "f2",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f2",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -131,8 +165,25 @@
                                 "to": [
                                     {
                                         "key_code": "f3",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f3",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -162,8 +213,25 @@
                                 "to": [
                                     {
                                         "key_code": "f4",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f4",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -193,8 +261,25 @@
                                 "to": [
                                     {
                                         "key_code": "f5",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f5",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -224,8 +309,25 @@
                                 "to": [
                                     {
                                         "key_code": "f6",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f6",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -255,8 +357,25 @@
                                 "to": [
                                     {
                                         "key_code": "f7",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f7",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -286,8 +405,25 @@
                                 "to": [
                                     {
                                         "key_code": "f8",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f8",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -317,8 +453,25 @@
                                 "to": [
                                     {
                                         "key_code": "f9",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f9",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -348,8 +501,25 @@
                                 "to": [
                                     {
                                         "key_code": "f10",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f10",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -379,8 +549,25 @@
                                 "to": [
                                     {
                                         "key_code": "f11",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f11",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -410,8 +597,58 @@
                                 "to": [
                                     {
                                         "key_code": "f12",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f12",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Torabo 以外で右 Shift の左隣のキーをハイフンにする",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "international1",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -4465,7 +4702,7 @@
                         ]
                     },
                     {
-                        "description": "c layer (=Torabo L5): F1–F12（fn付きで標準ファンクション）",
+                        "description": "c layer (=Torabo L5): macOS の設定に合わせて F1–F12 を標準ファンクションキーとして送る",
                         "manipulators": [
                             {
                                 "type": "basic",
@@ -4545,8 +4782,25 @@
                                     },
                                     {
                                         "key_code": "f12",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f12",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -4601,8 +4855,25 @@
                                 "to": [
                                     {
                                         "key_code": "f12",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f12",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -4639,8 +4910,25 @@
                                     },
                                     {
                                         "key_code": "f7",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f7",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -4695,8 +4983,25 @@
                                 "to": [
                                     {
                                         "key_code": "f7",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f7",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -4733,8 +5038,25 @@
                                     },
                                     {
                                         "key_code": "f8",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f8",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -4789,8 +5111,25 @@
                                 "to": [
                                     {
                                         "key_code": "f8",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f8",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -4827,8 +5166,25 @@
                                     },
                                     {
                                         "key_code": "f9",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f9",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -4883,8 +5239,25 @@
                                 "to": [
                                     {
                                         "key_code": "f9",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f9",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -4921,8 +5294,25 @@
                                     },
                                     {
                                         "key_code": "f11",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f11",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -4977,8 +5367,25 @@
                                 "to": [
                                     {
                                         "key_code": "f11",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f11",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5015,8 +5422,25 @@
                                     },
                                     {
                                         "key_code": "f4",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f4",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5071,8 +5495,25 @@
                                 "to": [
                                     {
                                         "key_code": "f4",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f4",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5109,8 +5550,25 @@
                                     },
                                     {
                                         "key_code": "f5",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f5",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5165,8 +5623,25 @@
                                 "to": [
                                     {
                                         "key_code": "f5",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f5",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5203,8 +5678,25 @@
                                     },
                                     {
                                         "key_code": "f6",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f6",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5259,8 +5751,25 @@
                                 "to": [
                                     {
                                         "key_code": "f6",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f6",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5297,8 +5806,25 @@
                                     },
                                     {
                                         "key_code": "f10",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f10",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5353,8 +5879,25 @@
                                 "to": [
                                     {
                                         "key_code": "f10",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f10",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5391,8 +5934,25 @@
                                     },
                                     {
                                         "key_code": "f1",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f1",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5447,8 +6007,25 @@
                                 "to": [
                                     {
                                         "key_code": "f1",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f1",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5485,8 +6062,25 @@
                                     },
                                     {
                                         "key_code": "f2",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f2",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5541,8 +6135,25 @@
                                 "to": [
                                     {
                                         "key_code": "f2",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f2",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -5579,8 +6190,25 @@
                                     },
                                     {
                                         "key_code": "f3",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f3",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ],
@@ -5635,8 +6263,25 @@
                                 "to": [
                                     {
                                         "key_code": "f3",
+                                        "conditions": [
+                                            {
+                                                "type": "variable_if",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key_code": "f3",
                                         "modifiers": [
                                             "fn"
+                                        ],
+                                        "conditions": [
+                                            {
+                                                "type": "variable_unless",
+                                                "name": "system.use_fkeys_as_standard_function_keys",
+                                                "value": true
+                                            }
                                         ]
                                     }
                                 ]
@@ -6814,18 +7459,6 @@
             ],
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "key_code": "international1"
-                    },
-                    "to": [
-                        {
-                            "key_code": "hyphen"
-                        }
-                    ]
-                }
-            ],
             "virtual_hid_keyboard": {
                 "keyboard_type_v2": "ansi"
             }
