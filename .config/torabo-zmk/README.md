@@ -13,7 +13,7 @@
 2. mainに変更が入るとビルドが始まります。手動でビルドするときは [GitHub ActionsのToraboビルド](https://github.com/ishiooon/dotfiles/actions/workflows/torabo-zmk.yml) で「Run workflow」を選びます。
 3. 成功した実行結果の「Artifacts」から `torabo-tsuki-s-firmware` をダウンロードします。ZIPには右親機と左子機の `.uf2` と、使った依存関係の一覧が入っています。
 
-ブラウザからの編集・ビルドはMac、Windows、Linuxで同じ手順です。MacのF長押し＋Bによるキー一覧にはKarabiner-Elementsが必要です。
+ブラウザからの編集・ビルドはMac、Windows、Linuxで同じ手順です。MacのF長押し＋Bによるキー一覧にはKarabiner-Elementsが必要です。Torabo本体では `F` 押し込み中の `N` が英数（ABC）、`M` がかな（あいう）です。内蔵キーボードでは Karabiner の `f+n` / `f+m` が同じ役割です。
 
 ### 手元でビルドする
 
@@ -32,6 +32,25 @@ ZMK Studioで入力を保存したことがある場合は、再書き込み後�
 左右を1台ずつUSB接続し、書き込みモードの `BLEMICROPRO` に、それぞれの役割の `.uf2` を転送します。この実機では転送後も書き込みドライブが残りました。転送が終わってからUSBを抜いて電源を切り、キーを押さずに挿し直すと、左右とも `Torabo-tsuki S` として起動しました。右だけがUSBキーボードとして入力を送ります。
 
 左右の電源を入れ、最初は右をUSBで給電したままMacのBluetooth設定から `Torabo-tsuki S` に接続します。旧 `(BMP)torabo-tsuki` の登録と競合する場合は、Macでその機器の登録を解除してから再検索します。[ZMKのBluetooth接続の切り分け](https://zmk.dev/docs/troubleshooting/connection-issues)
+
+接続がくるくるのまま進まないときは、Macから機器を削除したうえで、右をUSB接続したまま `B` を押しながら `D`（BT消去）→ `F`（プロファイル0）を押し、再度ペアします。settings reset ファームは、ブートローダに戻れないと復帰できないため常用しません。
+
+### Bluetoothが繋がらないとき（settings reset）
+
+Macの一覧に出ても接続がくるくるのまま進まないときは、左右のBluetooth記憶を消してから通常ファームを書き直します。ビルド成果物の `settings-reset-ble-micro-pro.uf2` を使います。
+
+1. MacのBluetoothから `Torabo-tsuki S` を削除する。
+2. 右をUSB接続し、ブートローダ（`BLEMICROPRO`）を起動して `settings-reset-ble-micro-pro.uf2` を入れる。
+3. **USBを抜き → 電源オン → もう一度USBを挿す**（書き込みだけではリセットが完了しない）。
+4. 左も同じ手順で settings reset する。
+5. 右に `torabo-tsuki-s-right-central.uf2`、左に `torabo-tsuki-s-left-peripheral.uf2` を書き込む。
+6. 左右の電源を入れ、右をUSB給電したままBluetoothで再ペアする。
+
+ブートローダの出し方:
+
+- **常用:** `B` を押しながら `P` でブートローダ（`BLEMICROPRO`）に入ります。通常の `P` 単体は文字入力のままです。
+- **予備:** USB接続中にシリアルを1200bpsで開いて閉じる。`ls /dev/tty.usb*` でポートを確認し、`screen /dev/tty.usbmodem… 1200` のあと `Ctrl+a` → `k` → `y`。
+- **settings reset 直後など、通常起動しないとき:** マイコンの BOOT と GND をショートしたままUSB接続します。
 
 Bluetooth接続ではZMK版がキーボードとマウスの両方として認識されます。Karabinerはマウスを既定で処理対象から外すため、[Karabinerの設定](../karabiner/karabiner.json)ではこのToraboだけを明示的に処理対象にしています。ToraboのFを長押ししながらBを押すと、Bを押している間にキー一覧が表示されます。
 

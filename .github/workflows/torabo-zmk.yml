@@ -43,5 +43,6 @@ jobs:
           path: |
             ${{ runner.temp }}/torabo-zmk/firmware/torabo-tsuki-s-right-central.uf2
             ${{ runner.temp }}/torabo-zmk/firmware/torabo-tsuki-s-left-peripheral.uf2
+            ${{ runner.temp }}/torabo-zmk/firmware/settings-reset-ble-micro-pro.uf2
             ${{ runner.temp }}/torabo-zmk/resolved-west.yml
           if-no-files-found: error

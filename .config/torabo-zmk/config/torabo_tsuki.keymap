@@ -1,5 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/pointing.h>
 #include "torabo-pointing.dtsi"
 
@@ -17,6 +18,7 @@
                        <&macro_tap &kp SPACE>,
                        <&macro_release &kp LCTRL>;
         )
+
     };
 
     keymap {
@@ -27,9 +29,9 @@
             display-name = "基本";
             bindings = <
                 &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y  &kp U  &lt 1 I  &kp O  &none
-                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &lt 1 K  &lt 1 L  &kp P
-                &kp Z  &kp X  &lt 5 C  &lt 4 V  &lt 6 B    &none  &kp N  &kp M  &none  &to 1
-                &trans  &kp LGUI  &kp LALT  &kp LCTRL  &mt LGUI RET  &mt LSHFT SPACE    &mt RSHFT SPACE  &mt RGUI KP_ENTER  &none  &none  &none  &lt 1 I
+                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &lt 1 K  &kp L  &kp P
+                &mt LCTRL Z  &kp X  &lt 5 C  &lt 4 V  &lt 6 B    &none  &kp N  &kp M  &none  &to 1
+                &kp CAPSLOCK  &kp LGUI  &kp LALT  &kp LALT  &mt LGUI RET  &mt LSHFT SPACE    &mt RSHFT SPACE  &mt RGUI KP_ENTER  &none  &none  &none  &to 0
             >;
         };
 
@@ -39,17 +41,19 @@
                 &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &mkp MB5  &trans
                 &trans  &trans  &trans  &trans  &trans    &mkp MB4  &mkp LCLK  &mo 8  &mkp RCLK  &mkp RCLK
                 &trans  &trans  &trans  &trans  &trans    &trans  &mo 8  &mkp LCLK  &trans  &to 0
-                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &mo 8
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &to 0
             >;
         };
 
         // 左手のFを保持してBを押すと、Macでキー一覧を開くF24を送る。
+        // F+Nで英数(ABC)、F+Mでかな(あいう)。MacのLANG2/LANG1に対応する。
+        // 一番右下は全レイヤーで &to 0（基本レイヤーへ強制復帰）。
         layer_2 {
             display-name = "移動";
             bindings = <
                 &kp ESC  &trans  &kp BSPC  &trans  &trans    &trans  &kp BSPC  &trans  &trans  &kp DEL
                 &kp TAB  &kp TAB  &kp LGUI  &trans  &trans    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans
-                &trans  &trans  &trans  &trans  &kp F24    &trans  &ctrl_space  &ctrl_space  &trans  &trans
+                &trans  &trans  &trans  &trans  &kp F24    &trans  &kp LANG2  &kp LANG1  &trans  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
@@ -64,12 +68,14 @@
             >;
         };
 
+        // Karabinerのv長押しと同じ記号配置（右手）。
+        // Y¥ U- I= O[ / H~ J; K' L\ P] / N, M. (M右隣)/
         layer_4 {
             display-name = "記号";
             bindings = <
-                &trans  &trans  &trans  &trans  &trans    &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &trans
-                &trans  &trans  &trans  &trans  &trans    &kp INTERNATIONAL_3  &kp SEMI  &kp SQT  &kp NON_US_HASH  &trans
-                &trans  &trans  &trans  &trans  &trans    &trans  &kp COMMA  &kp DOT  &kp FSLH  &kp INTERNATIONAL_1
+                &trans  &trans  &trans  &trans  &trans    &kp INTERNATIONAL_3  &kp MINUS  &kp EQUAL  &kp LBKT  &trans
+                &trans  &trans  &trans  &trans  &trans    &kp LS(GRAVE)  &kp SEMI  &kp SQT  &kp BSLH  &kp RBKT
+                &trans  &trans  &trans  &trans  &trans    &trans  &kp COMMA  &kp DOT  &kp FSLH  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
@@ -85,11 +91,12 @@
         };
 
         // このZMK版が送信できるConsumerページの電源とスリープを使用する。
+        // B長押し+Dで現在のBTプロファイル消去、B長押し+Fでプロファイル0選択（Mac再ペア用）。
         layer_6 {
             display-name = "記号・電源";
             bindings = <
                 &kp C_POWER  &trans  &trans  &trans  &trans    &kp EQUAL  &kp BSPC  &kp MINUS  &kp GRAVE  &kp C_SLEEP
-                &kp N1  &trans  &kp C_SLEEP  &kp C_SLEEP  &trans    &kp LS(BSLH)  &kp RBKT  &kp RBKT  &kp NON_US_HASH  &kp FSLH
+                &kp N1  &trans  &bt BT_CLR  &bt BT_SEL 0  &trans    &kp LS(BSLH)  &kp RBKT  &kp RBKT  &kp NON_US_HASH  &bootloader
                 &trans  &kp C_EJECT  &kp LGUI  &kp LALT  &trans    &kp BSLH  &kp SQT  &kp LBKT  &kp NON_US_BSLH  &kp INTERNATIONAL_1
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &kp SQT  &kp INTERNATIONAL_1  &trans
             >;
@@ -101,7 +108,7 @@
                 &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB4  &trans  &mkp MB5  &trans
                 &trans  &trans  &trans  &trans  &trans    &trans  &mkp LCLK  &mo 8  &mkp RCLK  &trans
                 &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &mo 8
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &to 0
             >;
         };
 

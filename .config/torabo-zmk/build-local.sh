@@ -123,7 +123,7 @@ run_build() {
         west manifest --freeze --active-only > resolved-west.yml
     '
 
-    # ネットワークから切り離して、右のトラックボール側と左の子機をコンパイルする。
+    # ネットワークから切り離して、右・左・Bluetooth設定リセット用をコンパイルする。
     "$docker_cli" run "${sandbox[@]}" --network none "$IMAGE" bash -ec '
         export ZEPHYR_BASE=/workspace/zephyr CMAKE_BUILD_PARALLEL_LEVEL=4
         west zephyr-export
@@ -136,10 +136,13 @@ run_build() {
                 -S studio-rpc-usb-uart -- -DZMK_CONFIG=/workspace/config \
                 "-DSHIELD=torabo_tsuki_$half" "${role[@]}"
         done
+        west build -p always -s zmk/app -d build-settings-reset -b ble_micro_pro -- \
+            -DSHIELD=settings_reset
         cp build-right/zephyr/zmk.uf2 firmware/torabo-tsuki-s-right-central.uf2
         cp build-left/zephyr/zmk.uf2 firmware/torabo-tsuki-s-left-peripheral.uf2
+        cp build-settings-reset/zephyr/zmk.uf2 firmware/settings-reset-ble-micro-pro.uf2
     '
-    printf '左右のファームウェア %s/firmware\n' "$workspace"
+    printf '左右と settings reset のファームウェア %s/firmware\n' "$workspace"
 }
 
 main "$@"

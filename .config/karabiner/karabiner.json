@@ -83,11 +83,33 @@
                                 ],
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "eisuu_cmd",
@@ -134,6 +156,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
                                         "value": true
@@ -156,6 +188,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
@@ -180,6 +222,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
                                         "value": true
@@ -203,6 +255,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
                                         "value": true
@@ -225,6 +287,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -257,6 +329,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
                                         "value": true
@@ -288,6 +370,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
@@ -342,7 +434,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -375,7 +479,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -408,7 +524,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -441,7 +569,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 500
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -477,6 +617,16 @@
                                 },
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "eisuu_cmd",
                                         "value": true
@@ -509,7 +659,19 @@
                                 ],
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -546,7 +708,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -583,7 +757,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -620,7 +806,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -657,7 +855,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -694,11 +904,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -723,6 +955,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_held",
                                         "value": true
@@ -745,6 +987,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -769,6 +1021,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_held",
                                         "value": true
@@ -791,6 +1053,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -846,11 +1118,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -874,6 +1168,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_cmd_layer",
@@ -931,7 +1235,19 @@
                                 ],
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -968,7 +1284,19 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -1005,11 +1333,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -1034,6 +1384,16 @@
                                 "type": "basic",
                                 "conditions": [
                                     {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
+                                    {
                                         "type": "variable_if",
                                         "name": "f_held",
                                         "value": true
@@ -1056,6 +1416,16 @@
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -1092,6 +1462,18 @@
                             },
                             {
                                 "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "japanese_eisuu",
                                     "modifiers": {
@@ -1123,6 +1505,18 @@
                             },
                             {
                                 "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "japanese_kana",
                                     "modifiers": {
@@ -1185,11 +1579,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 350
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "f_held",
@@ -1247,7 +1663,19 @@
                                 ],
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -1285,11 +1713,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1346,11 +1796,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1407,11 +1879,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1468,11 +1962,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1529,11 +2045,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1590,11 +2128,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1651,11 +2211,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1712,11 +2294,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1773,11 +2377,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1834,11 +2460,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "d_held",
@@ -1891,7 +2539,19 @@
                                 ],
                                 "parameters": {
                                     "basic.to_if_alone_timeout_milliseconds": 200
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
@@ -1929,11 +2589,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -1990,11 +2672,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2051,11 +2755,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2112,11 +2838,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2173,11 +2921,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2234,11 +3004,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2295,11 +3087,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2356,11 +3170,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2417,11 +3253,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2478,11 +3336,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2542,11 +3422,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2606,11 +3508,33 @@
                                 ],
                                 "parameters": {
                                     "basic.simultaneous_threshold_milliseconds": 250
-                                }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    }
+                                ]
                             },
                             {
                                 "type": "basic",
                                 "conditions": [
+                                    {
+                                        "type": "device_unless",
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 65261,
+                                                "product_id": 48301,
+                                                "is_keyboard": true
+                                            }
+                                        ]
+                                    },
                                     {
                                         "type": "variable_if",
                                         "name": "v_held",
@@ -2650,8 +3574,14 @@
             "selected": true,
             "simple_modifications": [
                 {
-                    "from": { "key_code": "international1" },
-                    "to": [{ "key_code": "hyphen" }]
+                    "from": {
+                        "key_code": "international1"
+                    },
+                    "to": [
+                        {
+                            "key_code": "hyphen"
+                        }
+                    ]
                 }
             ],
             "virtual_hid_keyboard": {

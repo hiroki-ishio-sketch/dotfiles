@@ -26,7 +26,19 @@ assert list(layers) == [*(f"layer_{index}" for index in range(8)), "drag_scroll"
 # 通常キーは変更できる。Macのキー一覧とドラッグスクロールに必要な予約位置だけを検証する。
 base = layers["layer_0"]
 assert base[13] == "&lt 2 F", "F長押しでキー一覧のレイヤーに入る"
+assert base[18] == "&kp L", "Lは単純なL"
+assert base[20] == "&mt LCTRL Z", "Z長押しはControl"
+assert base[30] == "&kp CAPSLOCK", "一番左下はCaps"
+assert base[31] == "&kp LGUI", "Capsの右はCommand"
+assert base[32] == "&kp LALT", "左親指の内側はOption"
+assert base[33] == "&kp LALT", "左Enterの左はOption"
+assert base[41] == "&to 0", "一番右下は基本レイヤーへ強制復帰"
 assert layers["layer_2"][24] == "&kp F24", "F長押しとBでキー一覧を開く"
+# L4記号はKarabinerのv長押しと同じ配置。
+symbols = layers["layer_4"]
+assert symbols[5:9] == ["&kp INTERNATIONAL_3", "&kp MINUS", "&kp EQUAL", "&kp LBKT"], "v層 Y¥ U- I= O["
+assert symbols[15:20] == ["&kp LS(GRAVE)", "&kp SEMI", "&kp SQT", "&kp BSLH", "&kp RBKT"], "v層 H~ J; K' L\\ P]"
+assert symbols[26:29] == ["&kp COMMA", "&kp DOT", "&kp FSLH"], "v層 N, M. /"
 assert all(binding == "&trans" for binding in layers["drag_scroll"]), "スクロール中も他のキー操作を透過する"
 print("成功: ZMKのS配列と主要なキー操作を確認しました。")
 PY

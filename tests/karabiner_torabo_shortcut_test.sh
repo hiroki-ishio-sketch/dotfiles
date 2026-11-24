@@ -26,11 +26,34 @@ assert shortcut["to"][0]["shell_command"].endswith("keymap-hud show'")
 assert shortcut["to_after_key_up"][0]["shell_command"].endswith("keymap-hud hide'")
 assert any(m["from"].get("key_code") == "b" and m.get("to", [{}])[0].get("shell_command", "").endswith("keymap-hud show'") for m in changes)
 
-# ZMK ではキー入力とカーソル操作が一つの機器として届くため、その Torabo の入力が変換の対象になることを確認する。
+# ZMK ではキー入力とカーソル操作が一つの機器として届く。無視はせず、F24 以外の変換だけ外す。
 torabo_identifiers = {
     "vendor_id": 65261, "product_id": 48301, "is_keyboard": True, "is_pointing_device": True
 }
 torabo_devices = [device for device in active.get("devices", []) if device["identifiers"] == torabo_identifiers]
 assert len(torabo_devices) == 1 and torabo_devices[0].get("ignore") is False, "ZMK 版 Torabo のキー入力が変換の対象になっていません。"
+
+def targets_torabo_only(manipulator):
+    for condition in manipulator.get("conditions") or []:
+        if condition.get("type") != "device_if":
+            continue
+        for ident in condition.get("identifiers") or []:
+            if ident.get("vendor_id") == 65261 and ident.get("product_id") == 48301:
+                return True
+    return False
+
+def excludes_torabo(manipulator):
+    for condition in manipulator.get("conditions") or []:
+        if condition.get("type") != "device_unless":
+            continue
+        for ident in condition.get("identifiers") or []:
+            if ident.get("vendor_id") == 65261 and ident.get("product_id") == 48301:
+                return True
+    return False
+
+for manipulator in changes:
+    if targets_torabo_only(manipulator):
+        continue
+    assert excludes_torabo(manipulator), "Torabo 向け以外の Karabiner 変換が Torabo にも掛かっています。"
 print("成功: 既存の f + b と、Torabo の入力設定および表示・非表示指示を確認しました。")
 PY

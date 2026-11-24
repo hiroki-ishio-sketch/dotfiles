@@ -2,42 +2,42 @@
   "title": "f layer + d number pad + v punctuation + 英数/かな/space tap-hold",
   "rules": [
     {
-        "description": "Torabo-tsuki (S) の f 長押し中に b を押してキー一覧を表示する",
-        "manipulators": [
-            {
-                "type": "basic",
-                "from": {
-                    "key_code": "f24",
-                    "modifiers": {
-                        "optional": [
-                            "any"
-                        ]
-                    }
-                },
-                "conditions": [
-                    {
-                        "type": "device_if",
-                        "identifiers": [
-                            {
-                                "vendor_id": 65261,
-                                "product_id": 48301,
-                                "is_keyboard": true
-                            }
-                        ]
-                    }
-                ],
-                "to": [
-                    {
-                        "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
-                    }
-                ],
-                "to_after_key_up": [
-                    {
-                        "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
-                    }
-                ]
+      "description": "Torabo-tsuki (S) の f 長押し中に b を押してキー一覧を表示する",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f24",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
             }
-        ]
+          },
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
+          "to": [
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud show'"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "shell_command": "/bin/bash -lc '$HOME/.bin/karabiner-keymap-hud hide'"
+            }
+          ]
+        }
+      ]
     },
     {
       "description": "f layer; f+n=ABC f+m=あいう; f+b=HUD; 英数 tap=Enter hold=⌘; f↔英数 either order +a = app switcher; space hold=Shift",
@@ -81,11 +81,33 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "eisuu_cmd",
@@ -132,6 +154,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -154,6 +186,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_cmd_layer",
@@ -178,6 +220,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -201,6 +253,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -223,6 +285,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -255,6 +327,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_cmd_layer",
               "value": true
@@ -286,6 +368,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_cmd_layer",
@@ -340,7 +432,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -373,7 +477,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -406,7 +522,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -439,7 +567,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 500
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -475,6 +615,16 @@
           },
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "eisuu_cmd",
               "value": true
@@ -507,7 +657,19 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -544,7 +706,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -581,7 +755,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -618,7 +804,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -655,7 +853,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -692,11 +902,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -721,6 +953,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_held",
               "value": true
@@ -743,6 +985,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -767,6 +1019,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_held",
               "value": true
@@ -789,6 +1051,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -844,11 +1116,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -872,6 +1166,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_cmd_layer",
@@ -929,7 +1233,19 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -966,7 +1282,19 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -1003,11 +1331,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -1032,6 +1382,16 @@
           "type": "basic",
           "conditions": [
             {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
+            {
               "type": "variable_if",
               "name": "f_held",
               "value": true
@@ -1054,6 +1414,16 @@
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -1090,6 +1460,18 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
           "from": {
             "key_code": "japanese_eisuu",
             "modifiers": {
@@ -1121,6 +1503,18 @@
         },
         {
           "type": "basic",
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ],
           "from": {
             "key_code": "japanese_kana",
             "modifiers": {
@@ -1183,11 +1577,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 350
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "f_held",
@@ -1245,7 +1661,19 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -1283,11 +1711,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1344,11 +1794,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1405,11 +1877,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1466,11 +1960,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1527,11 +2043,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1588,11 +2126,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1649,11 +2209,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1710,11 +2292,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1771,11 +2375,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1832,11 +2458,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "d_held",
@@ -1889,7 +2537,19 @@
           ],
           "parameters": {
             "basic.to_if_alone_timeout_milliseconds": 200
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
@@ -1927,11 +2587,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -1988,11 +2670,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2049,11 +2753,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2110,11 +2836,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2171,11 +2919,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2232,11 +3002,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2293,11 +3085,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2354,11 +3168,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2415,11 +3251,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2476,11 +3334,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2540,11 +3420,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",
@@ -2604,11 +3506,33 @@
           ],
           "parameters": {
             "basic.simultaneous_threshold_milliseconds": 250
-          }
+          },
+          "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "basic",
           "conditions": [
+            {
+              "type": "device_unless",
+              "identifiers": [
+                {
+                  "vendor_id": 65261,
+                  "product_id": 48301,
+                  "is_keyboard": true
+                }
+              ]
+            },
             {
               "type": "variable_if",
               "name": "v_held",

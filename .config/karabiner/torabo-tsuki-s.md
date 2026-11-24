@@ -15,7 +15,7 @@ swiftc -module-cache-path /private/tmp/torabo-swift-cache \
 /private/tmp/torabo-keymap-device apply-key ~/.config/karabiner/torabo-tsuki-s.json 2 2 5 0x0001
 ```
 
-Toraboでは `f` を長押ししてから `b` を押すと、移動レイヤーのB位置が表示用の `F24` を送り、Karabinerがキー一覧を開きます。通常の `f` と `b` の短押しは元の設定を使います。内蔵キーボードの `f + b` でも接続に応じて表示を選びます。編集用JSONはキー一覧を開くたびに読み直されます。
+Toraboでは `f` を長押ししてから `b` を押すと、移動レイヤーのB位置が表示用の `F24` を送り、Karabinerがキー一覧を開きます。同じ `f` 保持中の `n` が英数（ABC）、`m` がかな（あいう）です（ZMKでは `LANG2` / `LANG1`）。通常の `f`・`n`・`m`・`b` の短押しは元の設定を使います。内蔵キーボードの `f + b` / `f + n` / `f + m` でも同じ役割です。編集用JSONはキー一覧を開くたびに読み直されます。
 
 物理配置は[製作者のVial定義](https://github.com/sekigon-gonnoc/vial-qmk/blob/dev/ble-micro-pro/keyboards/sekigon/torabo_tsuki/keymaps/vial/vial.json)を基にしました。読み取り・編集には[Vialの公式プロトコル](https://github.com/vial-kb/vial-gui/blob/main/src/main/python/protocol/keyboard_comm.py)を使います。
 
