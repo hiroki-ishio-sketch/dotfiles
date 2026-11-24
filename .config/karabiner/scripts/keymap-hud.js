@@ -43,14 +43,27 @@ function buildHtmlDocument(html, jsonText, toraboModel) {
   return `${injection}\n${html}`;
 }
 
-function keymapDisplayScript(command, path) {
+function batterySubtitle(path) {
+  try {
+    const battery = JSON.parse(readText(path));
+    const parts = [];
+    if (Number.isFinite(battery.right)) parts.push(`右 ${battery.right}%`);
+    if (Number.isFinite(battery.left)) parts.push(`左 ${battery.left}%`);
+    if (parts.length) return parts.join(" · ");
+  } catch (error) {}
+  return "";
+}
+
+function keymapDisplayScript(command, path, batteryPath) {
   const showJis = 'window.showKeymap("jis")';
   if (command !== "show torabo") return showJis;
   try {
-    // 表示のたびに編集用 JSON を読み込む。欠損や不正値があれば内蔵用の表示を使う。
+    // 表示のたびに編集用 JSON と、HUD キャッシュの電池残量を読み込む。
     const definition = JSON.stringify(JSON.parse(readText(path)));
+    const subtitle = (batteryPath && batterySubtitle(batteryPath)) || "電池は次回の表示で更新されます";
     return `try {
       window.__TORABO_KEYMAP__ = buildToraboKeymap(JSON.parse(${JSON.stringify(definition)}));
+      window.__TORABO_BATTERY_SUBTITLE__ = ${JSON.stringify(subtitle)};
       window.showKeymap("torabo");
     } catch (error) { ${showJis}; }`;
   } catch (error) {
@@ -123,9 +136,10 @@ function run(argv) {
     }
     lastCmd = cmd;
     if (cmd === "show" || cmd === "show torabo") {
-      // 表示内容を切り替えてからパネルを開く。
+      // 表示内容を切り替えてからパネルを開く。電池は同ディレクトリのキャッシュを読む。
+      const batteryPath = cmdPath.replace(/[^/]+$/, "torabo-battery.json");
       webView.evaluateJavaScriptCompletionHandler(
-        keymapDisplayScript(cmd, configDir + "torabo-tsuki-s.json"),
+        keymapDisplayScript(cmd, configDir + "torabo-tsuki-s.json", batteryPath),
         function () {
           // 読み込み中にキーが離された場合は、すでに非表示になったパネルを開き直さない。
           if (lastCmd === cmd) {

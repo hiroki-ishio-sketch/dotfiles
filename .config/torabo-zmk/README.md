@@ -52,7 +52,7 @@ Macの一覧に出ても接続がくるくるのまま進まないときは、�
 - **予備:** USB接続中にシリアルを1200bpsで開いて閉じる。`ls /dev/tty.usb*` でポートを確認し、`screen /dev/tty.usbmodem… 1200` のあと `Ctrl+a` → `k` → `y`。
 - **settings reset 直後など、通常起動しないとき:** マイコンの BOOT と GND をショートしたままUSB接続します。
 
-Bluetooth接続ではZMK版がキーボードとマウスの両方として認識されます。Karabinerはマウスを既定で処理対象から外すため、[Karabinerの設定](../karabiner/karabiner.json)ではこのToraboだけを明示的に処理対象にしています。ToraboのFを長押ししながらBを押すと、Bを押している間にキー一覧が表示されます。
+Bluetooth接続ではZMK版がキーボードとマウスの両方として認識されます。Karabinerはマウスを既定で処理対象から外すため、[Karabinerの設定](../karabiner/karabiner.json)ではこのToraboだけを明示的に処理対象にしています（F24のキー一覧以外の変換は掛けません）。ToraboのFを長押ししながらBを押すと、Bを押している間にキー一覧と左右の電池残量が表示されます。初回は Bluetooth 許可が必要なことがあり、残量は次回表示から埋まる場合があります。
 
 ## Vialに戻すとき
 

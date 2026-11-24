@@ -38,18 +38,19 @@ function openKeymap(definition) {
   const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
   const layers = new Element();
   const heading = new Element();
+  const sub = new Element();
   const document = {
     body: new Element(),
     createElement: () => new Element(),
     getElementById: () => layers,
-    querySelector: () => heading,
+    querySelector: (selector) => selector === '#keymap-sub' ? sub : heading,
   };
   const window = {
     __KEYMAP_LAYERS__: JSON.parse(fs.readFileSync(path.join(config, 'keymap-layers.json'), 'utf8')),
     __TORABO_KEYMAP__: definition,
   };
   vm.runInNewContext(script, { window, document }, { timeout: 5000 });
-  return { window, layers, heading };
+  return { window, layers, heading, sub };
 }
 
 const options = {
@@ -58,10 +59,12 @@ const options = {
   keys: [{ id: 'left', x: -1, y: 1 }, { id: 'right', x: 5.25, y: 0 }],
   layers: [{ name: '通常', bindings: { left: 'F', right: 'B' } }, { name: '数字', bindings: { left: '1', right: '0' } }],
 };
-const { window, layers, heading } = openKeymap(options);
+const { window, layers, heading, sub } = openKeymap(options);
 assert.equal(layers.children.length, 4, '最初は従来のJISレイヤーを表示する');
+window.__TORABO_BATTERY_SUBTITLE__ = '右 80% · 左 70%';
 window.showKeymap('torabo');
 assert.equal(heading.textContent, 'Torabo-tsuki (S)');
+assert.match(sub.textContent, /右 80%/);
 assert.equal(layers.children.length, 2, '設定にあるレイヤーをすべて表示する');
 const [firstBoard, secondBoard] = layers.children;
 assert.equal(firstBoard.children[0].children[0].textContent, '通常');

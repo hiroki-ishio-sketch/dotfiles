@@ -334,7 +334,7 @@
   <div class="shell">
     <div class="header">
       <h1 id="keymap-title">Keymap Layers · JIS shape / US legends</h1>
-      <div class="sub">f + b で表示 · 離すと閉じる · Gruvbox Material</div>
+      <div class="sub" id="keymap-sub">f + b で表示 · 離すと閉じる · Gruvbox Material</div>
     </div>
     <div class="layers" id="layers"></div>
   </div>
@@ -508,6 +508,7 @@
     function showKeymap(profile) {
       const root = document.getElementById("layers");
       const title = document.querySelector("#keymap-title");
+      const sub = document.querySelector("#keymap-sub");
       const split = profile === "torabo" ? window.__TORABO_KEYMAP__ : null;
       const useSplit = Boolean(split && Array.isArray(split.keys) && split.keys.length &&
         split.keys.every((key) => key && Number.isFinite(key.x) && Number.isFinite(key.y)) &&
@@ -516,12 +517,19 @@
       root.replaceChildren();
       if (useSplit) {
         title.textContent = split.name || "Torabo-tsuki (S)";
+        if (sub) {
+          const battery = window.__TORABO_BATTERY_SUBTITLE__ || "";
+          sub.textContent = battery
+            ? `${battery} · f + b で表示 · 離すと閉じる`
+            : "f + b で表示 · 離すと閉じる · 電池取得中";
+        }
         renderToraboKeymap(root, split);
         return "torabo";
       }
       const def = window.__KEYMAP_LAYERS__;
       if (!def) throw new Error("JISの配列データがありません。");
       title.textContent = "Keymap Layers · JIS shape / US legends";
+      if (sub) sub.textContent = "f + b で表示 · 離すと閉じる · Gruvbox Material";
       for (const layer of def.layers) root.appendChild(renderLayer(layer, def));
       return "jis";
     }

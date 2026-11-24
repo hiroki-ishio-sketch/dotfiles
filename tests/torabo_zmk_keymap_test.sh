@@ -26,8 +26,10 @@ assert list(layers) == [*(f"layer_{index}" for index in range(8)), "drag_scroll"
 # 通常キーは変更できる。Macのキー一覧とドラッグスクロールに必要な予約位置だけを検証する。
 base = layers["layer_0"]
 assert base[13] == "&lt 2 F", "F長押しでキー一覧のレイヤーに入る"
+assert base[17] == "&scroll_k 8 K", "K長押しはスクロール層"
 assert base[18] == "&kp L", "Lは単純なL"
 assert base[20] == "&mt LCTRL Z", "Z長押しはControl"
+assert "scroll_k: hold_tap" in source, "K用の短いhold-tapがある"
 assert base[30] == "&kp CAPSLOCK", "一番左下はCaps"
 assert base[31] == "&kp LGUI", "Capsの右はCommand"
 assert base[32] == "&kp LALT", "左親指の内側はOption"

@@ -19,6 +19,15 @@
                        <&macro_release &kp LCTRL>;
         )
 
+        // K長押しでスクロール層へ入る。ボール操作を待たず短めの判定にする。
+        scroll_k: hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <120>;
+            quick-tap-ms = <200>;
+            flavor = "hold-preferred";
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     keymap {
@@ -29,7 +38,7 @@
             display-name = "基本";
             bindings = <
                 &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y  &kp U  &lt 1 I  &kp O  &none
-                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &lt 1 K  &kp L  &kp P
+                &kp A  &kp S  &lt 3 D  &lt 2 F  &kp G    &kp H  &kp J  &scroll_k 8 K  &kp L  &kp P
                 &mt LCTRL Z  &kp X  &lt 5 C  &lt 4 V  &lt 6 B    &none  &kp N  &kp M  &none  &to 1
                 &kp CAPSLOCK  &kp LGUI  &kp LALT  &kp LALT  &mt LGUI RET  &mt LSHFT SPACE    &mt RSHFT SPACE  &mt RGUI KP_ENTER  &none  &none  &none  &to 0
             >;
