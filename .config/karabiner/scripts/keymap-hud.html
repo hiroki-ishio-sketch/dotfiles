@@ -439,6 +439,7 @@
 
       const bindings = layer.bindings || {};
       const isHoldLayer = layer.id !== "base";
+      const hideUnassigned = isHoldLayer && !options.external;
       const isHoldKey = key === (layer.hold || layer.id);
       const layerMapped = Object.prototype.hasOwnProperty.call(bindings, key) ? bindings[key] : undefined;
       const baseMapped = baseBindings(def)[key];
@@ -456,7 +457,7 @@
         dead = true;
       } else if (fromBaseShift) {
         mapped = baseMapped;
-      } else if (isHoldLayer) {
+      } else if (hideUnassigned) {
         dead = true;
       } else {
         mapped = undefined;
@@ -523,7 +524,7 @@
           action.className = "action";
           action.textContent = mapped;
           keyEl.appendChild(action);
-        } else if (!isHoldLayer) {
+        } else if (!hideUnassigned) {
           const action = document.createElement("div");
           action.className = "action";
           action.textContent = glyph || "↩";
@@ -539,7 +540,7 @@
         action.textContent = mapped;
         if (mapped.length > 8) keyEl.dataset.longLabel = "";
         keyEl.appendChild(action);
-      } else if (!isHoldLayer && key !== "space") {
+      } else if (!hideUnassigned && key !== "space") {
         const name = displayName(key, def);
         if (!name && !glyph) {
           keyEl.style.visibility = "hidden";
@@ -558,7 +559,7 @@
       return keyEl;
     }
 
-    function renderLayer(layer, def) {
+    function renderLayer(layer, def, external) {
       const bindings = layer.bindings || {};
       const summaryEntries = Object.keys(bindings)
         .filter((key) => !isDeadBinding(bindings[key]))
@@ -576,10 +577,10 @@
         rowEl.className = "row";
         const extras = (def.row_extras && def.row_extras[String(rowIndex)]) || [];
         for (const key of row) {
-          rowEl.appendChild(createKey(key, layer, def));
+          rowEl.appendChild(createKey(key, layer, def, { external }));
           for (const extra of extras) {
             if (extra.after === key && !extra.placeholder) {
-              rowEl.appendChild(createKey(extra.key, layer, def, { jisReturn: extra.key === "return" }));
+              rowEl.appendChild(createKey(extra.key, layer, def, { external, jisReturn: extra.key === "return" }));
             }
           }
         }
@@ -601,11 +602,13 @@
     }
 
     // 常駐処理から表示する配列を受け取り、現在の画面を差し替える。
-    function showKeymap(profile) {
+    function showKeymap(profile, externalLayers) {
       const root = document.getElementById("layers");
       const title = document.querySelector("#keymap-title");
       const sub = document.querySelector("#keymap-sub");
-      const def = window.__KEYMAP_LAYERS__;
+      const jis = window.__KEYMAP_LAYERS__;
+      const external = profile === "external" && Array.isArray(externalLayers) && externalLayers.length > 0;
+      const def = external ? { ...jis, layers: externalLayers } : jis;
       const split = profile === "torabo" ? window.__TORABO_KEYMAP__ : null;
       const useSplit = Boolean(split && Array.isArray(split.keys) && split.keys.length &&
         split.keys.every((key) => key && Number.isFinite(key.x) && Number.isFinite(key.y)) &&
@@ -625,10 +628,10 @@
         return "torabo";
       }
       if (!def) throw new Error("JISの配列データがありません。");
-      title.textContent = "Keymap Layers · JIS shape / US legends";
-      if (sub) sub.textContent = "f + b で表示 · 離すと閉じる · Gruvbox Material";
-      for (const layer of def.layers) root.appendChild(renderLayer(layer, def));
-      return "jis";
+      title.textContent = external ? "外付けキーボード · JIS 配列" : "内蔵キーボード · JIS 配列";
+      if (sub) sub.textContent = external ? "f + b で表示 · 離すと閉じる" : "物理 e + f で表示 · 離すと閉じる";
+      for (const layer of def.layers) root.appendChild(renderLayer(layer, def, external));
+      return external ? "external" : "jis";
     }
 
     function renderToraboKeymap(root, definition) {

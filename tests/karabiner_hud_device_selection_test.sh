@@ -85,6 +85,10 @@ HUD_TEST_DEVICES=disconnected bash "$launcher" show torabo
   exit 1
 }
 
+# 外付けの旧配列はTorabo接続中でも外付け専用の表示指示を渡す。
+HUD_TEST_DEVICES=usb bash "$launcher" show external
+[[ "$(cat "$state_dir/command")" == 'show external' ]]
+
 bash "$launcher" hide
 [[ "$(cat "$state_dir/command")" == hide ]]
 [[ "$(bash "$launcher" status)" == 'running pid=12345 cmd=hide' ]]

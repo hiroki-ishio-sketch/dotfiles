@@ -21,11 +21,12 @@ readonly BATTERY_LOCK="$STATE_DIR/torabo-battery.lock"
 
 usage() {
   cat <<'USAGE'
-Usage: karabiner-keymap-hud show|show jis|show torabo|hide|status|start|stop
+Usage: karabiner-keymap-hud show [jis|external|torabo] | hide | status | start | stop
 
 f + b で使用するキー一覧を表示または非表示にします。
   show        … Torabo 接続中なら Torabo、なければ内蔵 JIS
   show jis    … 常に内蔵 JIS（上・外側ずらし）
+  show external … 常に外付けキーボードの従来配列
   show torabo … 常に Torabo-tsuki
 Torabo 表示時は直近の電池残量も見出しに出します。
 USAGE
@@ -114,8 +115,6 @@ refresh_battery_async() {
 show_hud() {
   local mode="${1:-auto}"
   start_daemon
-  local connection
-  connection="$(torabo_connection)" || connection=""
 
   case "$mode" in
     jis)
@@ -123,17 +122,16 @@ show_hud() {
       printf 'show\n' >"$CMD_FILE"
       return
       ;;
-    torabo)
-      printf 'show torabo\n' >"$CMD_FILE"
-      if [[ "$connection" == zmk-ble ]]; then
-        refresh_battery_async
-      fi
+    external)
+      printf 'show external\n' >"$CMD_FILE"
       return
       ;;
   esac
 
-  # auto: 接続中の Torabo があれば専用表示、なければ内蔵 JIS
-  if [[ -z "$connection" ]]; then
+  # 自動選択でToraboが見つからないときは内蔵JISを表示する。
+  local connection
+  connection="$(torabo_connection)" || connection=""
+  if [[ "$mode" == auto && -z "$connection" ]]; then
     printf 'show\n' >"$CMD_FILE"
     return
   fi
@@ -193,8 +191,7 @@ main() {
     show)
       case "${2:-}" in
         "") show_hud auto ;;
-        jis) show_hud jis ;;
-        torabo) show_hud torabo ;;
+        jis|external|torabo) show_hud "$2" ;;
         *)
           usage >&2
           exit 1

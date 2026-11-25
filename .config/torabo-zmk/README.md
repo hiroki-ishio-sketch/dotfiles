@@ -13,7 +13,7 @@
 2. mainに変更が入るとビルドが始まります。手動でビルドするときは [GitHub ActionsのToraboビルド](https://github.com/ishiooon/dotfiles/actions/workflows/torabo-zmk.yml) で「Run workflow」を選びます。
 3. 成功した実行結果の「Artifacts」から `torabo-tsuki-s-firmware` をダウンロードします。ZIPには右親機・左子機・設定消去用の `.uf2` と、使った依存関係の一覧が入っています。
 
-ブラウザからの編集・ビルドはMac、Windows、Linuxで同じ手順です。MacのF長押し＋Bによるキー一覧にはKarabiner-Elementsが必要です。Torabo本体では `F` 押し込み中の `N` が英数（ABC）、`M` がかな（あいう）です。内蔵キーボードでは Karabiner の `f+n` / `f+m` が同じ役割です。
+ブラウザからの編集・ビルドはMac、Windows、Linuxで同じ手順です。MacのF長押し＋Bによるキー一覧にはKarabiner-Elementsが必要です。Torabo本体では `F` 押し込み中の `N` が英数（ABC）、`M` がかな（あいう）です。Macの内蔵JISでは、物理 `e` を保持して `;` で英数、`:` でかなに切り替えます。
 
 ### 手元でビルドする
 
