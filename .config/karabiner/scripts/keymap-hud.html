@@ -387,7 +387,7 @@
       if (options.jisReturn) keyEl.classList.add("jis-return");
       if (key === "]") keyEl.classList.add("bracket-close");
       if (key === "space") keyEl.classList.add("space");
-      if (key === layer.id) keyEl.classList.add("holder");
+      if (key === (layer.hold || layer.id)) keyEl.classList.add("holder");
       if (mapped) keyEl.classList.add("mapped");
 
       const mods = new Set([

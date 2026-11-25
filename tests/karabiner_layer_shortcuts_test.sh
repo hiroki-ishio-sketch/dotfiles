@@ -15,15 +15,18 @@ from pathlib import Path
 
 # 数字と記号の出力は、設定ファイルの値ではなく利用者向けのキー配列から定義する。
 LAYER_OUTPUTS = {
-    "d": {
-        "n": "1", "m": "2", "comma": "3", "j": "4", "k": "5",
-        "l": "6", "u": "7", "i": "8", "o": "9", "p": "0",
+    # hold keys: d→w, v→d. chord keys follow letter homes after 上・外側ずらし.
+    "w": {
+        "semicolon": "1", "quote": "2", "backslash": "3", "p": "4", "open_bracket": "5",
+        "close_bracket": "6", "hyphen": "7", "equal_sign": "8", "international3": "9",
+        "return_or_enter": "0",
     },
-    "v": {
-        "n": "comma", "m": "period", "comma": "slash", "j": "semicolon",
-        "k": "quote", "l": "backslash", "u": "hyphen", "i": "equal_sign",
-        "o": "open_bracket", "p": "close_bracket", "h": "grave_accent_and_tilde",
-        "y": "international3",
+    "d": {
+        "semicolon": "comma", "quote": "period", "backslash": "slash", "p": "semicolon",
+        "open_bracket": "quote", "close_bracket": "backslash", "hyphen": "hyphen",
+        "equal_sign": "equal_sign", "international3": "open_bracket",
+        "return_or_enter": "close_bracket", "o": "grave_accent_and_tilde",
+        "0": "international3",
     },
 }
 SIDED_MODIFIERS = ("command", "control", "option", "shift")
@@ -53,7 +56,7 @@ def main():
 def verify_chord(manipulators, layer, key, output):
     # Shift の記号入力を維持し、左右の Command、Control、Option では同時押しを変換しない。
     expected = {"key_code": output}
-    if (layer, key) == ("v", "h"):
+    if (layer, key) == ("d", "o"):
         expected["modifiers"] = ["left_shift"]
     for modifiers in ACCEPTED_MODIFIERS:
         result = chord_outputs(manipulators, (layer, key), modifiers)

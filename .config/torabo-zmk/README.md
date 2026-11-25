@@ -52,7 +52,7 @@ ZMK Studioで保存した割り当ては再書き込み後も残ります。リ�
 - **予備:** USB接続中にシリアルを1200bpsで開いて閉じる。`ls /dev/tty.usb*` でポートを確認し、`screen /dev/tty.usbmodem… 1200` のあと `Ctrl+a` → `k` → `y`。
 - **settings reset 直後など、通常起動しないとき:** マイコンの BOOT と GND をショートしたままUSB接続します。
 
-Bluetooth接続ではZMK版がキーボードとマウスの両方として認識されます。[Karabinerの設定](../karabiner/karabiner.json)ではToraboを明示的に処理対象にし、F24での一覧表示と、F1〜F12を標準ファンクションキーとして送る処理を行います。ToraboのFを長押ししながらBを押すと、Bを押している間にキー一覧が表示されます。Bluetooth接続で取得できた左右の電池残量は、次回の一覧表示で確認できます。初回はBluetoothの許可が必要な場合があります。
+Bluetooth接続ではZMK版がキーボードとマウスの両方として認識されます。[Karabinerの設定](../karabiner/karabiner.json)ではToraboを明示的に処理対象にし、F24での一覧表示と、F1〜F12を標準ファンクションキーとして送る処理を行います。ToraboのFを長押ししながらBを押すと、Bを押している間にキー一覧が表示されます。Bluetooth接続時は裏で左右の電池残量を読み、**次回**の一覧表示の見出しに出します（例: `右 80% · 左 70%`）。初回は「このMacのBluetoothを許可」などのダイアログが出ることがあり、システム設定 → プライバシーとセキュリティ → Bluetooth で `torabo-battery` や Karabiner-Elements がオンになっている必要があります。USBのみの接続では残量は取れません。
 
 ## Vialに戻すとき
 

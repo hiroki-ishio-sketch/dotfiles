@@ -56,6 +56,8 @@ function batterySubtitle(path) {
 
 function keymapDisplayScript(command, path, batteryPath) {
   const showJis = 'window.showKeymap("jis")';
+  // show / show jis → 内蔵 JIS。show torabo だけ Torabo 専用表示。
+  if (command === "show" || command === "show jis") return showJis;
   if (command !== "show torabo") return showJis;
   try {
     // 表示のたびにToraboの表示用JSONと、保存された電池残量を読み込む。
@@ -135,7 +137,7 @@ function run(argv) {
       return;
     }
     lastCmd = cmd;
-    if (cmd === "show" || cmd === "show torabo") {
+    if (cmd === "show" || cmd === "show jis" || cmd === "show torabo") {
       // 表示内容を切り替えてからパネルを開く。電池は同ディレクトリのキャッシュを読む。
       const batteryPath = cmdPath.replace(/[^/]+$/, "torabo-battery.json");
       webView.evaluateJavaScriptCompletionHandler(
