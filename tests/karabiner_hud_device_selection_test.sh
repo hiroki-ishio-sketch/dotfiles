@@ -64,19 +64,19 @@ expect_display() {
   fi
 }
 
-expect_display disconnected 'show jis'
+expect_display disconnected show
 expect_display usb 'show torabo'
 expect_display ble 'show torabo'
 expect_display both 'show torabo'
-expect_display unrelated 'show jis'
-expect_display failure 'show jis'
-expect_display disconnected 'show jis'
-KARABINER_HUD_HIDUTIL="$fixture/見つからない" expect_display usb 'show jis'
+expect_display unrelated show
+expect_display failure show
+expect_display disconnected show
+KARABINER_HUD_HIDUTIL="$fixture/見つからない" expect_display usb show
 
-# Mac の f+b 相当は常に JIS、Torabo の F24 相当は常に Torabo
+# Mac の f+b 相当（show jis）は Torabo 接続中でもデーモンへは show（JIS）を渡す
 HUD_TEST_DEVICES=usb bash "$launcher" show jis
-[[ "$(cat "$state_dir/command")" == 'show jis' ]] || {
-  echo "show jis が Torabo 接続中でも JIS になりません。" >&2
+[[ "$(cat "$state_dir/command")" == show ]] || {
+  echo "show jis が Torabo 接続中でもデーモン向け show になりません。" >&2
   exit 1
 }
 HUD_TEST_DEVICES=disconnected bash "$launcher" show torabo

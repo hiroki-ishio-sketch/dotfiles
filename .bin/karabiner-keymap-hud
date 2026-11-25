@@ -119,7 +119,8 @@ show_hud() {
 
   case "$mode" in
     jis)
-      printf 'show jis\n' >"$CMD_FILE"
+      # 常駐デーモンは show / show torabo を見る。JIS強制は show を書く。
+      printf 'show\n' >"$CMD_FILE"
       return
       ;;
     torabo)
@@ -133,7 +134,7 @@ show_hud() {
 
   # auto: 接続中の Torabo があれば専用表示、なければ内蔵 JIS
   if [[ -z "$connection" ]]; then
-    printf 'show jis\n' >"$CMD_FILE"
+    printf 'show\n' >"$CMD_FILE"
     return
   fi
   printf 'show torabo\n' >"$CMD_FILE"
