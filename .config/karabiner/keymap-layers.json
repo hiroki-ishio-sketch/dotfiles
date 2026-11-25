@@ -70,8 +70,8 @@
     },
     {
       "id": "f",
-      "name": "f",
-      "trigger": "e 押し込み中（旧fレイヤー）",
+      "name": "e",
+      "trigger": "e 押し込み中",
       "bindings": {
         "1": "Esc",
         "3": "⌫",
@@ -92,8 +92,8 @@
     },
     {
       "id": "d",
-      "name": "d",
-      "trigger": "w 押し込み中（旧dレイヤー）",
+      "name": "w",
+      "trigger": "w 押し込み中",
       "bindings": {
         ";": "1",
         ":": "2",
@@ -110,8 +110,8 @@
     },
     {
       "id": "v",
-      "name": "v",
-      "trigger": "d 押し込み中（旧vレイヤー）",
+      "name": "d",
+      "trigger": "d 押し込み中",
       "bindings": {
         ";": ",",
         ":": ".",
@@ -130,8 +130,8 @@
     },
     {
       "id": "c",
-      "name": "c",
-      "trigger": "s 押し込み中（旧cレイヤー）",
+      "name": "s",
+      "trigger": "s 押し込み中",
       "bindings": {
         "0": "F12",
         "-": "F7",
@@ -150,8 +150,8 @@
     },
     {
       "id": "x",
-      "name": "x",
-      "trigger": "a 押し込み中（旧xレイヤー）",
+      "name": "a",
+      "trigger": "a 押し込み中",
       "bindings": {
         "0": "音量+",
         "-": "前",
